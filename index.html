@@ -1519,6 +1519,8 @@ If you don't know something specific about MAO Workforce or the user needs human
         body: JSON.stringify({ name, email, phone, category, message, source: 'chat_widget' })
       });
       if (!res.ok) throw new Error('Failed');
+      const form = document.getElementById('support-form');
+      if (form) form.style.display = 'none';
       addBotMessage(`Thanks${name ? ' '+name : ''}! We've received your message and will get back to you at <strong>${email}</strong> shortly. 😊`);
     } catch (err) {
       addBotMessage("Sorry, something went wrong submitting your request. Please email us directly at <a href='mailto:hello@maoworkforce.com'>hello@maoworkforce.com</a>");
