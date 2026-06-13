@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAO Workforce — HR & Payroll for Philippine Businesses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --heritage:    #06231c;
+      --terracotta:  #bf4b2e;
+      --terra-light: #d46140;
+      --parchment:   #fdfaf4;
+      --parch-deep:  #f5f1e8;
+      --parch-mid:   #f0eee9;
+      --text:        #2a2825;
+      --text-muted:  #6b665e;
+      --border:      #e5e0d5;
+      --on-heritage: #e8efeb;
+      --white:       #ffffff;
+      --green:       #1a4d2e;
+      --green-bg:    #eef6f0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Public Sans', system-ui, sans-serif;
+      background: var(--parchment);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(253,250,244,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700; font-size: 18px; color: var(--heritage); text-decoration: none;
+    }
+    .nav-logo img { height: 32px; width: auto; }
+    .nav-logo-mark {
+      width: 34px; height: 34px; background: var(--heritage);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      color: var(--on-heritage); font-size: 12px; font-weight: 700;
+      font-family: 'Public Sans', sans-serif; letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: var(--text); }
+    .btn-nav {
+      background: var(--terracotta); color: white;
+      padding: 9px 20px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: background 0.2s;
+      border: 2px solid var(--terracotta);
+    }
+    .btn-nav:hover { background: var(--terra-light); border-color: var(--terra-light); }
+
+    /* HERO */
+    .hero {
+      padding: 120px 5% 80px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-bg); border: 1px solid rgba(26,77,46,0.2);
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 12px; font-weight: 600; color: var(--green);
+      letter-spacing: 0.05em; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; }
+    .hero h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(36px, 4.5vw, 58px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--heritage);
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .hero h1 em { font-style: italic; color: var(--terracotta); }
+    .hero-sub {
+      font-size: 17px; color: var(--text-muted); line-height: 1.75;
+      margin-bottom: 36px; max-width: 480px; font-weight: 400;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--terracotta); color: white;
+      padding: 14px 28px; border-radius: 10px;
+      font-size: 15px; font-weight: 600; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block; font-family: 'Public Sans', sans-serif;
+    }
+    .btn-primary:hover { background: var(--terra-light); transform: translateY(-1px); }
+    .btn-ghost {
+      color: var(--text-muted); font-size: 15px; font-weight: 500;
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+    }
+    .btn-ghost:hover { color: var(--text); }
+    .hero-note { margin-top: 20px; font-size: 13px; color: var(--text-muted); }
+
+    /* PAYSLIP PREVIEW */
+    .payslip-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 6px rgba(6,35,28,0.06), 0 20px 60px rgba(6,35,28,0.12);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .payslip-header {
+      background: var(--heritage);
+      padding: 22px 26px;
+    }
+    .payslip-header-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .payslip-company { font-size: 11px; color: rgba(232,239,235,0.55); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .payslip-title { font-size: 19px; font-weight: 700; color: var(--on-heritage); font-family: 'Fraunces', serif; }
+    .payslip-badge {
+      background: rgba(26,77,46,0.6); border: 1px solid rgba(232,239,235,0.2);
+      padding: 4px 12px; border-radius: 100px;
+      font-size: 11px; font-weight: 600; color: #a8f0c6;
+    }
+    .payslip-emp { font-size: 13px; color: rgba(232,239,235,0.8); }
+    .payslip-period { font-size: 12px; color: rgba(232,239,235,0.5); margin-top: 2px; }
+    .payslip-body { padding: 22px 26px; }
+    .payslip-section { margin-bottom: 16px; }
+    .payslip-section-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 10px; padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .payslip-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 5px 0; font-size: 13px;
+    }
+    .payslip-row .label { color: var(--text-muted); }
+    .payslip-row .amount { font-weight: 500; color: var(--text); }
+    .payslip-row .amount.deduct { color: var(--terracotta); }
+    .payslip-row .amount.earn { color: var(--green); }
+    .payslip-divider { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+    .payslip-net {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--parch-deep); padding: 14px 16px; border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .payslip-net .label { font-weight: 600; font-size: 14px; color: var(--text); }
+    .payslip-net .amount { font-size: 20px; font-weight: 700; color: var(--heritage); font-family: 'Fraunces', serif; }
+    .payslip-footer {
+      padding: 12px 26px;
+      background: var(--parch-mid);
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .payslip-released { font-size: 11px; color: var(--text-muted); }
+    .payslip-status {
+      font-size: 11px; font-weight: 600; color: var(--green);
+      background: var(--green-bg); padding: 3px 10px; border-radius: 100px;
+    }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: var(--parch-deep); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 28px 5%; text-align: center;
+    }
+    .trust-bar p { font-size: 12px; color: var(--text-muted); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 20px; }
+    .trust-logos { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+    /* STATS */
+    .stats-wrap { padding: 80px 5% 0; }
+    .stats {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; background: var(--heritage); border-radius: 20px; overflow: hidden;
+      position: relative;
+    }
+    .stat-item {
+      background: transparent; padding: 56px 48px; text-align: left;
+      position: relative;
+    }
+    .stat-item:not(:last-child)::after {
+      content: ''; position: absolute; right: 0; top: 20%; height: 60%;
+      width: 1px; background: rgba(232,239,235,0.15);
+    }
+    .stat-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(48px, 5vw, 72px);
+      color: var(--terracotta); line-height: 1;
+      margin-bottom: 12px; font-weight: 700;
+    }
+    .stat-label { font-size: 14px; color: rgba(232,239,235,0.6); font-weight: 400; line-height: 1.5; max-width: 180px; }
+    .stat-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(232,239,235,0.35); margin-bottom: 16px; }
+
+    /* FEATURES */
+    .section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height: 1.15; letter-spacing: -0.02em;
+      max-width: 540px; margin-bottom: 16px;
+      color: var(--heritage); font-weight: 700;
+    }
+    .section-sub { font-size: 16px; color: var(--text-muted); max-width: 500px; line-height: 1.7; margin-bottom: 56px; }
+
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .feature-card {
+      background: white; border: 1px solid var(--border);
+      border-radius: 16px; padding: 36px 32px;
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--terracotta); opacity: 0; transition: opacity 0.2s;
+    }
+    .feature-card:hover { box-shadow: 0 12px 40px rgba(6,35,28,0.10); transform: translateY(-3px); }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--heritage); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+    }
+    .feature-icon svg { stroke: var(--on-heritage); }
+    .feature-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; color: var(--heritage); font-family: 'Fraunces', serif; }
+    .feature-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* COMPLIANCE */
+    .compliance { background: var(--heritage); padding: 80px 5%; }
+    .compliance-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .compliance-eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(232,239,235,0.5); margin-bottom: 16px;
+    }
+    .compliance h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.02em;
+      color: var(--on-heritage); font-weight: 700;
+    }
+    .compliance h2 em { font-style: italic; color: var(--terracotta); }
+    .compliance p { color: rgba(232,239,235,0.6); font-size: 16px; line-height: 1.75; margin-bottom: 32px; }
+    .compliance-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+    .compliance-tag {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      padding: 7px 16px; border-radius: 100px;
+      font-size: 13px; font-weight: 500; color: rgba(232,239,235,0.85);
+    }
+    .compliance-right { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .compliance-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 14px; padding: 22px;
+    }
+    .compliance-card-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      color: rgba(232,239,235,0.4); margin-bottom: 10px;
+    }
+    .compliance-card-value { font-size: 22px; font-weight: 700; color: var(--terracotta); margin-bottom: 4px; font-family: 'Fraunces', serif; }
+    .compliance-card-desc { font-size: 12px; color: rgba(232,239,235,0.45); line-height: 1.5; }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    }
+    .pricing-card {
+      background: white; border: 1px solid var(--border);
+      border-radius: 16px; padding: 30px 26px; position: relative;
+    }
+    .pricing-card.featured {
+      background: var(--heritage); color: white; border-color: var(--heritage);
+    }
+    .pricing-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--terracotta); color: white;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 100px;
+    }
+    .pricing-tier {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 12px;
+    }
+    .pricing-card.featured .pricing-tier { color: rgba(232,239,235,0.5); }
+    .pricing-price { margin-bottom: 6px; display: flex; align-items: flex-end; gap: 2px; }
+    .pricing-currency { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .pricing-card.featured .pricing-currency { color: rgba(232,239,235,0.7); }
+    .pricing-amount {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 46px; line-height: 1; letter-spacing: -0.03em; font-weight: 700;
+      color: var(--heritage);
+    }
+    .pricing-card.featured .pricing-amount { color: white; }
+    .pricing-period { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; padding-bottom: 4px; }
+    .pricing-card.featured .pricing-period { color: rgba(232,239,235,0.5); }
+    .pricing-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.55; }
+    .pricing-card.featured .pricing-desc { color: rgba(232,239,235,0.65); }
+    .pricing-features { list-style: none; margin-bottom: 28px; }
+    .pricing-features li {
+      font-size: 13px; padding: 5px 0; color: var(--text-muted);
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .pricing-card.featured .pricing-features li { color: rgba(232,239,235,0.75); }
+    .pricing-features li::before { content: '✓'; font-weight: 700; color: var(--terracotta); flex-shrink: 0; margin-top: 1px; }
+    .pricing-card.featured .pricing-features li::before { color: var(--terracotta); }
+    .btn-pricing {
+      display: block; text-align: center; padding: 11px;
+      border-radius: 9px; font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+      border: 1.5px solid var(--border); color: var(--text);
+      font-family: 'Public Sans', sans-serif;
+    }
+    .btn-pricing:hover { border-color: var(--terracotta); color: var(--terracotta); }
+    .btn-pricing.primary {
+      background: var(--terracotta); color: white; border-color: var(--terracotta);
+    }
+    .btn-pricing.primary:hover { background: var(--terra-light); border-color: var(--terra-light); }
+    .pricing-note { text-align: center; margin-top: 24px; font-size: 13px; color: var(--text-muted); }
+
+    /* TESTIMONIALS */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .testimonial-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(232,239,235,0.1);
+      border-radius: 14px; padding: 32px;
+    }
+    .testimonial-stars { color: var(--terracotta); font-size: 13px; margin-bottom: 16px; letter-spacing: 3px; }
+    .testimonial-text {
+      font-size: 15px; line-height: 1.7; color: rgba(232,239,235,0.85); margin-bottom: 24px;
+      font-style: italic; font-family: 'Fraunces', serif; font-weight: 400;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(191,75,46,0.2); border: 1px solid rgba(191,75,46,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; color: var(--terracotta); flex-shrink: 0;
+    }
+    .testimonial-name { font-size: 14px; font-weight: 600; color: var(--on-heritage); }
+    .testimonial-role { font-size: 12px; color: rgba(232,239,235,0.45); }
+
+    /* CTA */
+    .cta-section { padding: 80px 5%; text-align: center; }
+    .cta-inner {
+      max-width: 680px; margin: 0 auto;
+      background: var(--heritage); border-radius: 20px;
+      padding: 72px 60px; color: white;
+    }
+    .cta-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: 16px;
+    }
+    .cta-inner h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 3.5vw, 42px);
+      line-height: 1.15; margin-bottom: 16px;
+      color: var(--on-heritage); font-weight: 700;
+    }
+    .cta-inner h2 em { font-style: italic; color: var(--terracotta); }
+    .cta-inner p { font-size: 16px; color: rgba(232,239,235,0.65); margin-bottom: 36px; }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-cta-primary {
+      background: var(--terracotta); color: white;
+      padding: 14px 30px; border-radius: 10px;
+      font-size: 15px; font-weight: 600; text-decoration: none;
+      transition: all 0.2s; font-family: 'Public Sans', sans-serif;
+    }
+    .btn-cta-primary:hover { background: var(--terra-light); transform: translateY(-1px); }
+    .btn-cta-ghost {
+      border: 1.5px solid rgba(232,239,235,0.25); color: var(--on-heritage);
+      padding: 14px 30px; border-radius: 10px;
+      font-size: 15px; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; font-family: 'Public Sans', sans-serif;
+    }
+    .btn-cta-ghost:hover { border-color: rgba(232,239,235,0.5); }
+    .cta-fine { margin-top: 20px; font-size: 13px; color: rgba(232,239,235,0.35); }
+
+    /* FOOTER */
+    footer { background: var(--heritage); padding: 60px 5% 40px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 56px;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+    }
+    .footer-logo-mark {
+      width: 32px; height: 32px; background: var(--terracotta);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: white; letter-spacing: 0.02em;
+    }
+    .footer-logo-name {
+      font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700; color: var(--on-heritage);
+    }
+    .footer-tagline { font-size: 14px; color: rgba(232,239,235,0.5); line-height: 1.65; max-width: 260px; }
+    .footer-col h4 { font-size: 12px; font-weight: 700; color: var(--on-heritage); margin-bottom: 16px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .footer-col a { display: block; font-size: 14px; color: rgba(232,239,235,0.5); text-decoration: none; margin-bottom: 10px; }
+    .footer-col a:hover { color: rgba(232,239,235,0.85); }
+    .footer-bottom {
+      border-top: 1px solid rgba(232,239,235,0.1);
+      padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(232,239,235,0.35); }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { font-size: 13px; color: rgba(232,239,235,0.35); text-decoration: none; }
+    .footer-bottom-links a:hover { color: rgba(232,239,235,0.65); }
+
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .payslip-card { max-width: 420px; }
+      .features-grid, .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr 1fr; }
+      .compliance-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .stats { grid-template-columns: 1fr; }
+      .nav-links > a:not(.btn-nav) { display: none; }
+    }
+    @media (max-width: 600px) {
+      .features-grid, .testimonials-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .cta-inner { padding: 48px 28px; }
+      .compliance-right { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://gnwfrffneehpknyaygeb.supabase.co/storage/v1/object/public/assets/MAO%20Workforce%20Logo-4.png" alt="MAO Workforce" style="height:36px;width:auto;border-radius:4px;" />
+    MAO Workforce
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#compliance">Compliance</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://portal.maoworkforce.com">Log in</a>
+    <a href="https://portal.maoworkforce.com" class="btn-nav" style="color: white !important;">Start free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background: var(--heritage);">
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow" style="background: rgba(232,239,235,0.1); border-color: rgba(232,239,235,0.15); color: #a8f0c6;">
+        <span class="hero-eyebrow-dot" style="background: #a8f0c6;"></span>
+        Built for Philippine businesses
+      </div>
+      <h1 style="color: var(--on-heritage);">Finally, payroll you can <em style="color: var(--terracotta);">run yourself.</em></h1>
+      <p class="hero-sub" style="color: rgba(232,239,235,0.65);">MAO Workforce is built for Philippine business owners — not accountants. SSS, PhilHealth, Pag-IBIG, and BIR withholding computed automatically, every cutoff.</p>
+      <div class="hero-actions">
+        <a href="https://portal.maoworkforce.com" class="btn-primary">Start free — no credit card</a>
+        <a href="#features" class="btn-ghost" style="color: rgba(232,239,235,0.65);">See how it works →</a>
+      </div>
+      <p class="hero-note" style="color: rgba(232,239,235,0.4);">Free plan available. Paid plans from ₱399/month.</p>
+    </div>
+
+    <div class="payslip-card">
+      <div class="payslip-header">
+        <div class="payslip-header-top">
+          <div>
+            <div class="payslip-company">Nami's Cuddle & Co.</div>
+            <div class="payslip-title">Payslip</div>
+          </div>
+          <div class="payslip-badge">Released</div>
+        </div>
+        <div class="payslip-emp">Maria Santos · Operations</div>
+        <div class="payslip-period">June 1–15, 2026 · Semi-monthly</div>
+      </div>
+      <div class="payslip-body">
+        <div class="payslip-section">
+          <div class="payslip-section-label">Earnings</div>
+          <div class="payslip-row"><span class="label">Regular Pay</span><span class="amount earn">₱12,500.00</span></div>
+          <div class="payslip-row"><span class="label">Allowance</span><span class="amount earn">₱1,250.00</span></div>
+        </div>
+        <div class="payslip-section">
+          <div class="payslip-section-label">Statutory Deductions</div>
+          <div class="payslip-row"><span class="label">SSS</span><span class="amount deduct">−₱900.00</span></div>
+          <div class="payslip-row"><span class="label">PhilHealth</span><span class="amount deduct">−₱625.00</span></div>
+          <div class="payslip-row"><span class="label">Pag-IBIG</span><span class="amount deduct">−₱100.00</span></div>
+        </div>
+        <hr class="payslip-divider">
+        <div class="payslip-net">
+          <span class="label">Net Pay</span>
+          <span class="amount">₱12,125.00</span>
+        </div>
+      </div>
+      <div class="payslip-footer">
+        <span class="payslip-released">Released Jun 20, 2026</span>
+        <span class="payslip-status">✓ BIR Compliant</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <p>Computes contributions for all major Philippine statutory agencies</p>
+  <div class="trust-logos">
+    <div style="display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--border);padding:12px 22px;border-radius:100px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06231c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 10v11M12 10v11M16 10v11"/></svg>
+      <span style="font-weight:700;font-size:13px;color:var(--heritage);">SSS</span>
+      <span style="font-size:12px;color:var(--text-muted);">Social Security</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--border);padding:12px 22px;border-radius:100px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06231c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      <span style="font-weight:700;font-size:13px;color:var(--heritage);">PhilHealth</span>
+      <span style="font-size:12px;color:var(--text-muted);">Health Insurance</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--border);padding:12px 22px;border-radius:100px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06231c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span style="font-weight:700;font-size:13px;color:var(--heritage);">Pag-IBIG</span>
+      <span style="font-size:12px;color:var(--text-muted);">Housing Fund</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--border);padding:12px 22px;border-radius:100px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06231c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <span style="font-weight:700;font-size:13px;color:var(--heritage);">BIR</span>
+      <span style="font-size:12px;color:var(--text-muted);">TRAIN Law WHT</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-wrap">
+  <div class="stats reveal-stagger">
+    <div class="stat-item">
+      <div class="stat-eyebrow">Tax compliance</div>
+      <div class="stat-num">100%</div>
+      <div class="stat-label">TRAIN Law compliant withholding tax computation</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-eyebrow">No more</div>
+      <div class="stat-num">0</div>
+      <div class="stat-label">Spreadsheets needed to run a full payroll cycle</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-eyebrow">Time to run payroll</div>
+      <div class="stat-num">5 min</div>
+      <div class="stat-label">Average time from draft to released payslips</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-eyebrow">Everything you need</div>
+  <h2 class="section-title">One platform for <em style="font-style:italic;color:var(--terracotta);">HR and payroll</em></h2>
+  <p class="section-sub">From hiring to payslips, MAO Workforce handles the full employee lifecycle so you can focus on running your business.</p>
+  <div class="features-grid reveal-stagger">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8efeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      </div>
+      <h3>Automated Payroll</h3>
+      <p>Run payroll in minutes. Computes regular pay, overtime, holiday pay, and night differential automatically, per your cutoff schedule.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8efeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 10v11M12 10v11M16 10v11"/></svg>
+      </div>
+      <h3>Statutory Compliance</h3>
+      <p>SSS, PhilHealth, Pag-IBIG, and BIR withholding tax computed every run using the latest TRAIN Law brackets. No manual lookups.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8efeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>Attendance Tracking</h3>
+      <p>Log attendance via kiosk, QR code, or PIN. Late deductions, undertime, absences, and overtime fed straight into payroll.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8efeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <h3>Leave Management</h3>
+      <p>Track leave balances, approve requests, and have paid leave automatically reflected in payroll. SL, VL, and emergency leave supported.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8efeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
+      <h3>Payroll Reports</h3>
+      <p>Payroll summaries, statutory contributions, labor cost trends, and employee payslips — all exportable to PDF.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8efeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <h3>Employee Self-Service</h3>
+      <p>Employees view payslips, file corrections, request leave, and clock in and out — from their phone or the kiosk tablet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<div class="compliance" id="compliance">
+  <div class="compliance-inner reveal-stagger">
+    <div>
+      <div class="compliance-eyebrow">Philippine compliance</div>
+      <h2>Every deduction, <em>computed correctly</em></h2>
+      <p>Getting statutory contributions wrong means penalties, back pay, and audit risk. MAO Workforce uses the current official tables from SSS, PhilHealth, Pag-IBIG, and BIR — applied automatically each payroll run.</p>
+      <div class="compliance-tags">
+        <span class="compliance-tag">SSS 2024 Table</span>
+        <span class="compliance-tag">PhilHealth 5%</span>
+        <span class="compliance-tag">Pag-IBIG ₱100 cap</span>
+        <span class="compliance-tag">TRAIN Law WHT</span>
+        <span class="compliance-tag">13th Month Pay</span>
+        <span class="compliance-tag">MWE Exemption</span>
+      </div>
+    </div>
+    <div class="compliance-right">
+      <div class="compliance-card">
+        <div class="compliance-card-label">SSS</div>
+        <div class="compliance-card-value">Auto</div>
+        <div class="compliance-card-desc">Computed from official contribution table by salary bracket</div>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-card-label">PhilHealth</div>
+        <div class="compliance-card-value">5%</div>
+        <div class="compliance-card-desc">Rate applied to monthly salary, split 50/50 employee-employer</div>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-card-label">Pag-IBIG</div>
+        <div class="compliance-card-value">₱100</div>
+        <div class="compliance-card-desc">Max employee contribution with matching employer share</div>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-card-label">BIR Withholding</div>
+        <div class="compliance-card-value">TRAIN</div>
+        <div class="compliance-card-desc">2023+ tax brackets applied per payroll cycle type</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div style="background: var(--parch-deep);">
+<section class="section" id="pricing">
+  <div class="section-eyebrow">Pricing</div>
+  <h2 class="section-title">Simple pricing, <em style="font-style:italic;color:var(--terracotta);">no surprises</em></h2>
+  <p class="section-sub">Start free and upgrade as you grow. All paid plans include a 30-day free trial.</p>
+
+  <!-- Billing toggle -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:48px;">
+    <span id="toggle-monthly" style="font-size:14px;font-weight:600;color:var(--heritage);cursor:pointer;">Monthly</span>
+    <div id="billing-toggle" onclick="toggleBilling()" style="width:48px;height:26px;background:var(--terracotta);border-radius:100px;position:relative;cursor:pointer;transition:background 0.2s;">
+      <div id="toggle-dot" style="width:20px;height:20px;background:white;border-radius:50%;position:absolute;top:3px;left:3px;transition:transform 0.2s;"></div>
+    </div>
+    <span id="toggle-annual" style="font-size:14px;font-weight:400;color:var(--text-muted);cursor:pointer;">Annual <span style="background:var(--green-bg);color:var(--green);font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;margin-left:4px;">Save 17%</span></span>
+  </div>
+
+  <div class="pricing-grid reveal-stagger">
+    <div class="pricing-card">
+      <div class="pricing-tier">Free</div>
+      <div class="pricing-price">
+        <span class="pricing-currency">₱</span>
+        <span class="pricing-amount">0</span>
+      </div>
+      <div class="pricing-period">forever</div>
+      <p class="pricing-desc">For solo owners and micro-businesses just getting started.</p>
+      <ul class="pricing-features">
+        <li>Up to 10 employees</li>
+        <li>Attendance tracking</li>
+        <li>Kiosk clock-in</li>
+        <li>Employee self-service</li>
+      </ul>
+      <a href="https://portal.maoworkforce.com" class="btn-pricing">Get started free</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Starter</div>
+      <div class="pricing-price">
+        <span class="pricing-currency">₱</span>
+        <span class="pricing-amount monthly-price">399</span>
+        <span class="pricing-amount annual-price" style="display:none;">332</span>
+      </div>
+      <div class="pricing-period">per month <span class="annual-label" style="display:none;font-size:11px;color:var(--green);font-weight:600;">billed ₱3,990/yr</span></div>
+      <p class="pricing-desc">For small teams that need proper payroll and compliance.</p>
+      <ul class="pricing-features">
+        <li>Up to 25 employees</li>
+        <li>Full payroll automation</li>
+        <li>SSS / PhilHealth / Pag-IBIG</li>
+        <li>BIR withholding tax</li>
+        <li>Leave management</li>
+        <li>Payroll reports</li>
+      </ul>
+      <a href="https://portal.maoworkforce.com" class="btn-pricing">Start 30-day trial</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Most popular</div>
+      <div class="pricing-tier">Growth</div>
+      <div class="pricing-price">
+        <span class="pricing-currency" style="color:rgba(232,239,235,0.6)">₱</span>
+        <span class="pricing-amount monthly-price">899</span>
+        <span class="pricing-amount annual-price" style="display:none;">749</span>
+      </div>
+      <div class="pricing-period">per month <span class="annual-label" style="display:none;font-size:11px;color:#a8f0c6;font-weight:600;">billed ₱8,990/yr</span></div>
+      <p class="pricing-desc">For growing businesses with multi-branch operations.</p>
+      <ul class="pricing-features">
+        <li>Up to 50 employees</li>
+        <li>Everything in Starter</li>
+        <li>Kiosk clock-in app</li>
+        <li>Shift scheduling</li>
+        <li>Labor cost reports</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="https://portal.maoworkforce.com" class="btn-pricing primary">Start 30-day trial</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Pro</div>
+      <div class="pricing-price">
+        <span class="pricing-currency">₱</span>
+        <span class="pricing-amount monthly-price">1,899</span>
+        <span class="pricing-amount annual-price" style="display:none;">1,582</span>
+      </div>
+      <div class="pricing-period">per month <span class="annual-label" style="display:none;font-size:11px;color:var(--green);font-weight:600;">billed ₱18,990/yr</span></div>
+      <p class="pricing-desc">For established businesses needing advanced controls.</p>
+      <ul class="pricing-features">
+        <li>Up to 100 employees</li>
+        <li>Everything in Growth</li>
+        <li>Multi-branch payroll</li>
+        <li>Commissions tracking</li>
+        <li>Advanced reports</li>
+        <li>Dedicated support</li>
+      </ul>
+      <a href="https://portal.maoworkforce.com" class="btn-pricing">Start 30-day trial</a>
+    </div>
+  </div>
+
+  <!-- Custom / Ala carte -->
+  <div style="margin-top:24px;background:var(--parch-deep);border:1px solid var(--border);border-radius:16px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;">
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--terracotta);margin-bottom:8px;">Enterprise & Custom</div>
+      <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--heritage);margin-bottom:6px;">Need something tailored?</div>
+      <p style="font-size:14px;color:var(--text-muted);max-width:500px;">Large teams, custom integrations, or ala carte modules — we'll put together a plan that fits exactly what your business needs.</p>
+    </div>
+    <a href="mailto:hello@maoworkforce.com" style="background:var(--heritage);color:white;padding:14px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background 0.2s;" onmouseover="this.style.background='#0d3d2e'" onmouseout="this.style.background='var(--heritage)'">Talk to us →</a>
+  </div>
+
+  <p class="pricing-note">All paid plans include a 30-day free trial. No credit card required to start.</p>
+</section>
+
+<script>
+  let isAnnual = false;
+  function toggleBilling() {
+    isAnnual = !isAnnual;
+    document.getElementById('toggle-dot').style.transform = isAnnual ? 'translateX(22px)' : 'translateX(0)';
+    document.getElementById('toggle-monthly').style.fontWeight = isAnnual ? '400' : '600';
+    document.getElementById('toggle-monthly').style.color = isAnnual ? 'var(--text-muted)' : 'var(--heritage)';
+    document.getElementById('toggle-annual').style.fontWeight = isAnnual ? '600' : '400';
+    document.getElementById('toggle-annual').style.color = isAnnual ? 'var(--heritage)' : 'var(--text-muted)';
+    document.querySelectorAll('.monthly-price').forEach(el => el.style.display = isAnnual ? 'none' : 'inline');
+    document.querySelectorAll('.annual-price').forEach(el => el.style.display = isAnnual ? 'inline' : 'none');
+    document.querySelectorAll('.annual-label').forEach(el => el.style.display = isAnnual ? 'inline' : 'none');
+  }
+</script>
+
+<!-- TESTIMONIALS -->
+<div style="background: var(--heritage);">
+<section class="section" style="padding-top: 100px;">
+  <div class="section-eyebrow" style="color: rgba(232,239,235,0.5);">What customers say</div>
+  <h2 class="section-title" style="color: var(--on-heritage);">Built for businesses <em style="font-style:italic;color:var(--terracotta);">like yours</em></h2>
+  <p class="section-sub" style="margin-bottom: 44px; color: rgba(232,239,235,0.6);">Real feedback from Filipino business owners who switched to MAO Workforce.</p>
+  <div class="testimonials-grid reveal-stagger">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"We used to spend two days every payroll cycle computing SSS and PhilHealth manually. MAO does it in minutes and I can finally trust the numbers."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">RC</div>
+        <div>
+          <div class="testimonial-name">Rica C.</div>
+          <div class="testimonial-role">Owner, F&B Restaurant Group · Quezon City</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"The kiosk clock-in feature changed everything. Staff scan their QR code and attendance goes straight to payroll. No more time sheet disputes."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">JM</div>
+        <div>
+          <div class="testimonial-name">Jun M.</div>
+          <div class="testimonial-role">HR Manager, Retail Chain · Cebu</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"We had an audit scare because our BIR withholding was wrong. Switching to MAO Workforce means that can't happen again — it's computed correctly every time."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">AL</div>
+        <div>
+          <div class="testimonial-name">Ana L.</div>
+          <div class="testimonial-role">Finance Director, Wellness Spa · BGC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- FAQ -->
+<div style="background: var(--parch-deep); padding: 100px 5% 100px;">
+<section style="max-width: 1200px; margin: 0 auto;" id="faq">
+  <div class="section-eyebrow">FAQ</div>
+  <h2 class="section-title">Questions? <em style="font-style:italic;color:var(--terracotta);">We have answers.</em></h2>
+  <p class="section-sub" style="margin-bottom: 40px;">Can't find what you're looking for? <a href="mailto:hello@maoworkforce.com" style="color:var(--terracotta);font-weight:600;text-decoration:none;">Email us</a> and we'll get back to you.</p>
+
+  <!-- Search -->
+  <div style="position:relative;max-width:520px;margin-bottom:48px;">
+    <svg style="position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="faq-search" oninput="filterFAQ(this.value)" type="text" placeholder="Search questions..." style="width:100%;padding:12px 16px 12px 44px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:'Public Sans',sans-serif;background:white;color:var(--text);outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--terracotta)'" onblur="this.style.borderColor='var(--border)'" />
+  </div>
+
+  <!-- Category tabs -->
+  <div id="faq-tabs" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;">
+    <button onclick="filterCategory('all')" class="faq-tab active" data-cat="all">All</button>
+    <button onclick="filterCategory('payroll')" class="faq-tab" data-cat="payroll">Payroll</button>
+    <button onclick="filterCategory('compliance')" class="faq-tab" data-cat="compliance">Compliance</button>
+    <button onclick="filterCategory('plans')" class="faq-tab" data-cat="plans">Plans & Billing</button>
+    <button onclick="filterCategory('features')" class="faq-tab" data-cat="features">Features</button>
+    <button onclick="filterCategory('security')" class="faq-tab" data-cat="security">Security & Data</button>
+  </div>
+
+  <!-- FAQ items -->
+  <div id="faq-list" style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px;">
+
+    <div class="faq-item" data-cat="payroll" data-q="do i need an accountant to use mao workforce can i run payroll myself">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>Do I need an accountant to use MAO Workforce?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>No — MAO Workforce is designed specifically for business owners who want to run payroll themselves. SSS, PhilHealth, Pag-IBIG, and BIR withholding are all computed automatically based on current Philippine rates. No accounting background required.</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="payroll" data-q="what payroll schedules are supported weekly semi-monthly monthly">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>What payroll schedules are supported?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>MAO Workforce supports weekly, semi-monthly, and monthly payroll cycles. You set your cutoff schedule once and the system generates payroll runs automatically based on your chosen frequency.</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="payroll" data-q="how does overtime holiday pay night differential work">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>How are overtime, holiday pay, and night differential computed?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>All pay types follow the Labor Code of the Philippines. Regular OT is 125%, rest day OT is 130%, regular holiday is 200%, and special holidays are 130%. Night differential (10pm–6am) is an additional 10%. All are automatically applied based on attendance logs.</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="compliance" data-q="sss philhealth pagibig bir withholding tax compliant train law">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>Is MAO Workforce compliant with SSS, PhilHealth, Pag-IBIG, and BIR?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>Yes. MAO Workforce uses the current official contribution tables for SSS (2024), PhilHealth (5% rate), and Pag-IBIG (₱100 max employee contribution). BIR withholding tax is computed using the TRAIN Law 2023+ brackets. Rates are updated whenever the government issues new schedules.</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="compliance" data-q="minimum wage earner tax exempt mwe">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>Are minimum wage earners handled correctly?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>Yes. You can flag an employee as a Minimum Wage Earner (MWE) in their profile. MWEs are automatically exempt from BIR withholding tax per NIRC Section 24(A)(2).</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="plans" data-q="free plan how does it work what is included">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>How does the free plan work?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>The free plan supports up to 10 employees and includes attendance tracking, kiosk clock-in, and employee self-service. It's free forever with no time limit. To access payroll automation and statutory compliance, upgrade to the Starter plan or start a 30-day trial.</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="plans" data-q="what happens after 30 day trial ends">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>What happens after my 30-day trial ends?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>After your trial, you can choose to subscribe to a paid plan or downgrade to the free plan. Your data is never deleted. We'll notify you before your trial ends so you have time to decide.</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="plans" data-q="can i switch plans upgrade downgrade anytime">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>Can I switch plans at any time?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>Yes. You can upgrade or downgrade your plan at any time from your settings page. Upgrades take effect immediately. Downgrades take effect at the end of your current billing cycle.</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="features" data-q="multiple branches multi-branch supported">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>Do you support multiple branches?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>Yes. The Growth plan supports up to 2 branches and the Pro plan supports up to 5. Each branch can have its own employees, schedules, and payroll runs. For more branches, contact us for a custom plan.</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="features" data-q="employees view payslips self service portal">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>Can employees view their own payslips?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>Yes. Every employee gets access to the MAO Workforce employee portal where they can view payslips, check leave balances, file attendance corrections, and request time off — all from their phone or computer.</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="security" data-q="data security safe encrypted stored philippines">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>Is my data secure?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>Yes. All data is encrypted in transit and at rest. We use Supabase infrastructure hosted in the Asia-Pacific region. Your payroll and employee data is never shared with third parties and is only accessible to authorized users in your account.</p></div>
+    </div>
+
+    <div class="faq-item" data-cat="security" data-q="delete account data portability export">
+      <button class="faq-q" onclick="toggleFAQ(this)">
+        <span>Can I export or delete my data?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a"><p>Yes. You can export payroll reports and payslips to PDF at any time. To request a full data export or account deletion, contact us at hello@maoworkforce.com and we'll process it within 7 business days.</p></div>
+    </div>
+
+  </div>
+
+  <div id="faq-empty" style="display:none;text-align:center;padding:48px;color:var(--text-muted);font-size:15px;">
+    No questions match your search. <a href="mailto:hello@maoworkforce.com" style="color:var(--terracotta);font-weight:600;text-decoration:none;">Ask us directly →</a>
+  </div>
+</section>
+
+<style>
+  .faq-tab {
+    padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 500;
+    border: 1.5px solid var(--border); background: white; color: var(--text-muted);
+    cursor: pointer; transition: all 0.15s; font-family: 'Public Sans', sans-serif;
+  }
+  .faq-tab:hover { border-color: var(--terracotta); color: var(--terracotta); }
+  .faq-tab.active { background: var(--heritage); border-color: var(--heritage); color: white; font-weight: 600; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-item.hidden { display: none; }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 28px; background: white; border: none; cursor: pointer;
+    font-size: 15px; font-weight: 600; color: var(--heritage); text-align: left;
+    font-family: 'Public Sans', sans-serif; gap: 16px; transition: background 0.15s;
+  }
+  .faq-q:hover { background: var(--parch-deep); }
+  .faq-q.open { background: var(--parch-deep); }
+  .faq-chevron { flex-shrink: 0; transition: transform 0.25s; color: var(--text-muted); }
+  .faq-q.open .faq-chevron { transform: rotate(180deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 28px; background: var(--parch-deep);
+  }
+  .faq-a.open { max-height: 200px; padding: 0 28px 20px; }
+  .faq-a p { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+</style>
+
+<script>
+  function toggleFAQ(btn) {
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-a');
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q.open').forEach(b => {
+      b.classList.remove('open');
+      b.closest('.faq-item').querySelector('.faq-a').classList.remove('open');
+    });
+    if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+  }
+
+  function filterCategory(cat) {
+    document.querySelectorAll('.faq-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.classList.toggle('hidden', cat !== 'all' && item.dataset.cat !== cat);
+    });
+    checkEmpty();
+  }
+
+  function filterFAQ(query) {
+    const q = query.toLowerCase().trim();
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const text = (item.dataset.q + ' ' + item.querySelector('.faq-q span').textContent).toLowerCase();
+      item.classList.toggle('hidden', q.length > 0 && !text.includes(q));
+    });
+    if (q.length > 0) {
+      document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
+    } else {
+      document.querySelector('.faq-tab[data-cat="all"]').classList.add('active');
+    }
+    checkEmpty();
+  }
+
+  function checkEmpty() {
+    const visible = [...document.querySelectorAll('.faq-item')].filter(i => !i.classList.contains('hidden'));
+    document.getElementById('faq-empty').style.display = visible.length === 0 ? 'block' : 'none';
+    document.getElementById('faq-list').style.display = visible.length === 0 ? 'none' : 'flex';
+  }
+</script>
+
+</section>
+</div>
+
+<!-- APP STORES -->
+<div style="background: var(--heritage); padding: 60px 5%; text-align: center;">
+  <div style="max-width: 600px; margin: 0 auto;">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 14px;">Mobile app</div>
+    <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(24px, 3vw, 36px); color: var(--on-heritage); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;">Manage your team <em style="font-style: italic; color: var(--terracotta);">on the go</em></h2>
+    <p style="font-size: 15px; color: rgba(232,239,235,0.6); margin-bottom: 32px; line-height: 1.7;">The MAO Workforce mobile app is coming soon to iOS and Android. Clock in, approve leave, and check payslips — right from your phone.</p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(232,239,235,0.2); color: white; padding: 12px 24px; border-radius: 12px; opacity: 0.7; cursor: not-allowed;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.15-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04l-.08.23zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div style="text-align: left;">
+          <div style="font-size: 10px; font-weight: 500; opacity: 0.7;">Coming soon to</div>
+          <div style="font-size: 15px; font-weight: 700;">App Store</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(232,239,235,0.2); color: white; padding: 12px 24px; border-radius: 12px; opacity: 0.7; cursor: not-allowed;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.3.17.64.22.97.15l11.37-6.57-2.45-2.45-9.89 8.87zM.48 2.1C.18 2.43 0 2.94 0 3.6v16.8c0 .66.18 1.17.48 1.5l.08.07 9.41-9.41v-.22L.56 2.03l-.08.07zM20.13 10.5l-2.68-1.55-2.7 2.7 2.7 2.7 2.7-1.56c.77-.44.77-1.16-.02-1.29zM3.18.24L13.07 8.1l-2.45 2.45L.21.09C.54.02.88.07 1.18.24z"/></svg>
+        <div style="text-align: left;">
+          <div style="font-size: 10px; font-weight: 500; opacity: 0.7;">Coming soon to</div>
+          <div style="font-size: 15px; font-weight: 700;">Google Play</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner reveal">
+    <div class="cta-eyebrow">Get started today</div>
+    <h2>Run payroll <em>the right way</em></h2>
+    <p>Join Philippine business owners who've replaced spreadsheets and accountant calls with MAO Workforce. Free to start, no credit card needed.</p>
+    <div class="cta-actions">
+      <a href="https://portal.maoworkforce.com" class="btn-cta-primary">Create your free account</a>
+      <a href="mailto:hello@maoworkforce.com" class="btn-cta-ghost">Talk to us</a>
+    </div>
+    <p class="cta-fine">Free plan available forever. Paid plans from ₱399/month.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <img src="https://gnwfrffneehpknyaygeb.supabase.co/storage/v1/object/public/assets/MAO%20Workforce%20Logo-4.png" alt="MAO Workforce" style="height:32px;width:auto;border-radius:4px;filter:brightness(0) invert(1);opacity:0.8;" />
+          <span class="footer-logo-name">MAO Workforce</span>
+        </div>
+        <p class="footer-tagline">HR and payroll software built for Philippine businesses. Statutory compliant, always.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#compliance">Compliance</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://portal.maoworkforce.com">Log in</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="mailto:hello@maoworkforce.com">Contact</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 MAO Workforce | Powered by LeviO. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Fade up animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Stagger children */
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:0s; }
+  .reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:0.1s; }
+  .reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:0.2s; }
+  .reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:0.3s; }
+  .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:0.4s; }
+
+  /* Hero entrance */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(32px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity:0; }
+    to   { opacity:1; }
+  }
+  .hero-eyebrow { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+  .hero h1      { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+  .hero-sub     { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+  .hero-actions { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.45s both; }
+  .hero-note    { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.55s both; }
+  .payslip-card { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
+
+  /* Payslip rows count up feel */
+  @keyframes slideRight {
+    from { opacity:0; transform:translateX(-12px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-stagger > *, .hero-eyebrow, .hero h1, .hero-sub,
+    .hero-actions, .hero-note, .payslip-card { animation: none; opacity:1; transform:none; transition:none; }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
