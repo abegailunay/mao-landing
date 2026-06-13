@@ -543,5 +543,489 @@
     });
   });
 </script>
+<!-- MAOMAO AI CHAT WIDGET -->
+<style>
+  #maomao-widget {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    font-family: 'Public Sans', sans-serif;
+    user-select: none;
+  }
+  #maomao-bubble {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: white; border: 3px solid var(--terracotta);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 4px 20px rgba(6,35,28,0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  #maomao-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(6,35,28,0.35); }
+  #maomao-bubble img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+  #maomao-notif {
+    position: absolute; top: -4px; right: -4px;
+    width: 14px; height: 14px; background: var(--terracotta);
+    border-radius: 50%; border: 2px solid white;
+    display: none;
+  }
+  #maomao-teaser {
+    position: absolute; bottom: 68px; right: 0;
+    background: white; border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 16px;
+    font-size: 13px; color: var(--text); white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    animation: fadeUp 0.4s ease both;
+  }
+  #maomao-teaser::after {
+    content: ''; position: absolute; bottom: -6px; right: 20px;
+    width: 12px; height: 12px; background: white;
+    border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    transform: rotate(45deg);
+  }
+  #maomao-window {
+    position: absolute; bottom: 72px; right: 0;
+    width: 360px; height: 520px;
+    background: white; border-radius: 20px;
+    box-shadow: 0 8px 48px rgba(6,35,28,0.18);
+    border: 1px solid var(--border);
+    display: none; flex-direction: column;
+    overflow: hidden;
+    animation: fadeUp 0.3s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  #maomao-window.open { display: flex; }
+  .mm-header {
+    background: var(--heritage); padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .mm-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 2px solid var(--terracotta);
+    overflow: hidden; flex-shrink: 0;
+    background: var(--terracotta); display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .mm-header-info { flex: 1; }
+  .mm-name { font-size: 14px; font-weight: 700; color: white; }
+  .mm-status { font-size: 11px; color: rgba(232,239,235,0.6); display: flex; align-items: center; gap: 4px; }
+  .mm-status-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; }
+  .mm-close { background: none; border: none; color: rgba(232,239,235,0.6); cursor: pointer; font-size: 20px; padding: 0; line-height: 1; }
+  .mm-close:hover { color: white; }
+  .mm-messages {
+    flex: 1; overflow-y: auto; padding: 16px;
+    display: flex; flex-direction: column; gap: 12px;
+    scroll-behavior: smooth;
+  }
+  .mm-messages::-webkit-scrollbar { width: 4px; }
+  .mm-messages::-webkit-scrollbar-track { background: transparent; }
+  .mm-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .mm-msg { display: flex; gap: 8px; align-items: flex-end; }
+  .mm-msg.user { flex-direction: row-reverse; }
+  .mm-msg-avatar {
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    overflow: hidden; border: 1.5px solid var(--border);
+  }
+  .mm-msg-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .mm-msg-avatar.user-av { background: var(--terracotta); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; color: white; border-color: var(--terracotta); }
+  .mm-bubble {
+    max-width: 78%; padding: 10px 14px; border-radius: 16px;
+    font-size: 13px; line-height: 1.6; color: var(--text);
+    background: var(--parch-deep); border: 1px solid var(--border);
+  }
+  .mm-msg.user .mm-bubble { background: var(--heritage); color: white; border-color: var(--heritage); border-radius: 16px 16px 4px 16px; }
+  .mm-msg:not(.user) .mm-bubble { border-radius: 16px 16px 16px 4px; }
+  .mm-bubble p { margin: 0 0 6px; }
+  .mm-bubble p:last-child { margin-bottom: 0; }
+  .mm-bubble strong { font-weight: 700; color: var(--heritage); }
+  .mm-msg.user .mm-bubble strong { color: white; }
+  .mm-bubble a { color: var(--terracotta); font-weight: 600; }
+  .mm-typing { display: flex; gap: 4px; align-items: center; padding: 4px 2px; }
+  .mm-typing span { width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; animation: mmBounce 1.2s infinite; }
+  .mm-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .mm-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes mmBounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+  .mm-quick-replies {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;
+  }
+  .mm-qr {
+    background: white; border: 1px solid var(--border); border-radius: 100px;
+    padding: 5px 12px; font-size: 12px; color: var(--heritage); cursor: pointer;
+    font-family: 'Public Sans', sans-serif; transition: all 0.15s;
+  }
+  .mm-qr:hover { background: var(--heritage); color: white; border-color: var(--heritage); }
+  .mm-footer { padding: 12px 16px; border-top: 1px solid var(--border); background: white; }
+  .mm-input-row { display: flex; gap: 8px; align-items: flex-end; }
+  .mm-input {
+    flex: 1; border: 1.5px solid var(--border); border-radius: 12px;
+    padding: 10px 14px; font-size: 13px; font-family: 'Public Sans', sans-serif;
+    color: var(--text); resize: none; max-height: 100px; outline: none;
+    transition: border-color 0.2s; line-height: 1.5;
+  }
+  .mm-input:focus { border-color: var(--terracotta); }
+  .mm-send {
+    width: 38px; height: 38px; border-radius: 10px; border: none;
+    background: var(--terracotta); color: white; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .mm-send:hover { background: var(--terra-light); }
+  .mm-send:disabled { background: var(--border); cursor: not-allowed; }
+  .mm-powered { text-align: center; font-size: 10px; color: var(--text-muted); margin-top: 8px; }
+  .mm-contact-card {
+    background: var(--parch-deep); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px 14px; margin-top: 6px;
+  }
+  .mm-contact-card p { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+  .mm-contact-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+  .mm-contact-btn {
+    padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;
+    cursor: pointer; font-family: 'Public Sans', sans-serif; border: none;
+    transition: all 0.15s;
+  }
+  .mm-contact-btn.primary { background: var(--terracotta); color: white; }
+  .mm-contact-btn.primary:hover { background: var(--terra-light); }
+  .mm-contact-btn.secondary { background: white; color: var(--heritage); border: 1px solid var(--border); }
+  .mm-contact-btn.secondary:hover { border-color: var(--heritage); }
+
+  /* Callback form */
+  .mm-callback-form { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .mm-callback-form input {
+    border: 1.5px solid var(--border); border-radius: 8px;
+    padding: 8px 12px; font-size: 12px; font-family: 'Public Sans', sans-serif;
+    color: var(--text); outline: none;
+  }
+  .mm-callback-form input:focus { border-color: var(--terracotta); }
+</style>
+
+<div id="maomao-widget">
+  <div id="maomao-teaser">👋 Hi! I'm Maomao, your MAO Workforce guide!</div>
+  <div id="maomao-window">
+    <div class="mm-header">
+    <div class="mm-avatar">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DArdyI0Tgr9wzM2XQWaSxibXD8/hf_20260613_004011_cf8d085f-111b-47ef-8b55-d5ab66ccf14c.jpeg" alt="Maomao" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50%;" />
+      </div>
+      <div class="mm-header-info">
+        <div class="mm-name">Maomao</div>
+        <div class="mm-status"><span class="mm-status-dot"></span> MAO Workforce Assistant</div>
+      </div>
+      <button class="mm-close" onclick="toggleMaomao()">×</button>
+    </div>
+    <div class="mm-messages" id="mm-messages"></div>
+    <div class="mm-footer">
+      <div class="mm-input-row">
+        <textarea class="mm-input" id="mm-input" placeholder="Ask me anything..." rows="1"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"
+          oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="mm-send" id="mm-send" onclick="sendMessage()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+      <div class="mm-powered">MAO Workforce · Maomao Assistant</div>
+    </div>
+  </div>
+  <div id="maomao-bubble" onclick="toggleMaomao()">
+    <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DArdyI0Tgr9wzM2XQWaSxibXD8/hf_20260613_004011_cf8d085f-111b-47ef-8b55-d5ab66ccf14c.jpeg" alt="Maomao" style="width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:top;" />
+    <div id="maomao-notif"></div>
+  </div>
+</div>
+
+<script>
+  // Hide teaser after 5 seconds
+  setTimeout(() => {
+    const t = document.getElementById('maomao-teaser');
+    if (t) { t.style.opacity='0'; t.style.transition='opacity 0.5s'; setTimeout(()=>t.remove(),500); }
+  }, 5000);
+
+  let isOpen = false;
+  let isDragging = false;
+  let dragStart = null;
+  let messages = [];
+
+  const SYSTEM_PROMPT = `You are Maomao, the friendly and knowledgeable AI assistant for MAO Workforce — a Philippine HR and payroll SaaS platform built for business owners.
+
+Your role is to:
+1. Answer questions about MAO Workforce features, pricing, and how to get started
+2. Help with general Philippine HR and payroll questions (SSS, PhilHealth, Pag-IBIG, BIR, TRAIN Law, Labor Code)
+3. Guide users to the right plan for their needs
+4. Be warm, concise, and helpful
+
+Key facts about MAO Workforce:
+- Built for Philippine SMB business owners — not accountants
+- Automates SSS, PhilHealth, Pag-IBIG, and BIR withholding tax (TRAIN Law 2023+)
+- Supports weekly, semi-monthly, and monthly payroll cycles
+- Features: automated payroll, attendance tracking (kiosk/QR/PIN), leave management, employee self-service, payroll reports, shift scheduling
+- Mobile app coming soon (iOS and Android)
+
+Pricing:
+- Free: ₱0 forever, up to 10 employees, attendance + kiosk only
+- Starter: ₱399/month (₱319/month annual), up to 25 employees, full payroll + statutory compliance
+- Growth: ₱899/month (₱719/month annual), up to 50 employees, everything in Starter + kiosk app + scheduling + reports
+- Pro: ₱1,899/month (₱1,519/month annual), up to 100 employees, everything in Growth + multi-branch + commissions
+- Enterprise: custom pricing, contact hello@maoworkforce.com
+- All paid plans include a 30-day free trial, no credit card required
+- Annual plans save 20%
+
+Portal: portal.maoworkforce.com
+Contact: hello@maoworkforce.com
+
+If you don't know something specific about MAO Workforce or the user needs human support, say so honestly and suggest they contact support or request a callback. Keep responses concise — under 150 words unless a detailed explanation is needed. Use a friendly, conversational tone. Format with short paragraphs, not bullet lists when possible.`;
+
+  function toggleMaomao() {
+    isOpen = !isOpen;
+    const win = document.getElementById('maomao-window');
+    win.classList.toggle('open', isOpen);
+    if (isOpen && messages.length === 0) {
+      setTimeout(() => addBotMessage(
+        "Hi! I'm Maomao 👋 I'm here to help you learn about MAO Workforce. What can I help you with?",
+        ['How does pricing work?', 'What payroll features are included?', 'Is it BIR compliant?', 'How do I get started?']
+      ), 300);
+    }
+  }
+
+  function formatMessage(text) {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>')
+      .replace(/^/, '<p>')
+      .replace(/$/, '</p>');
+  }
+
+  function addBotMessage(text, quickReplies = []) {
+    const msgs = document.getElementById('mm-messages');
+    const div = document.createElement('div');
+    div.className = 'mm-msg';
+    div.innerHTML = `
+      <div class="mm-msg-avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DArdyI0Tgr9wzM2XQWaSxibXD8/hf_20260613_004011_cf8d085f-111b-47ef-8b55-d5ab66ccf14c.jpeg" alt="Maomao" /></div>
+      <div>
+        <div class="mm-bubble">${formatMessage(text)}</div>
+        ${quickReplies.length ? `<div class="mm-quick-replies">${quickReplies.map(q=>`<button class="mm-qr" onclick="sendQuick('${q}')">${q}</button>`).join('')}</div>` : ''}
+      </div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function addUserMessage(text) {
+    const msgs = document.getElementById('mm-messages');
+    const div = document.createElement('div');
+    div.className = 'mm-msg user';
+    div.innerHTML = `<div class="mm-msg-avatar user-av">U</div><div class="mm-bubble">${text}</div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function addTyping() {
+    const msgs = document.getElementById('mm-messages');
+    const div = document.createElement('div');
+    div.className = 'mm-msg'; div.id = 'mm-typing';
+    div.innerHTML = `<div class="mm-msg-avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DArdyI0Tgr9wzM2XQWaSxibXD8/hf_20260613_004011_cf8d085f-111b-47ef-8b55-d5ab66ccf14c.jpeg" alt="Maomao" /></div><div class="mm-bubble"><div class="mm-typing"><span></span><span></span><span></span></div></div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return div;
+  }
+
+  function addContactCard() {
+    const msgs = document.getElementById('mm-messages');
+    const div = document.createElement('div');
+    div.className = 'mm-msg';
+    div.innerHTML = `<div class="mm-msg-avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DArdyI0Tgr9wzM2XQWaSxibXD8/hf_20260613_004011_cf8d085f-111b-47ef-8b55-d5ab66ccf14c.jpeg" alt="Maomao" /></div>
+      <div class="mm-contact-card">
+        <p>Need more help? Our team is happy to assist.</p>
+        <div class="mm-contact-btns">
+          <button class="mm-contact-btn primary" onclick="showSupportForm()">📧 Contact Support</button>
+          <button class="mm-contact-btn secondary" onclick="showCallbackForm()">📞 Request Callback</button>
+        </div>
+      </div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function showSupportForm() {
+    const msgs = document.getElementById('mm-messages');
+    const div = document.createElement('div');
+    div.className = 'mm-msg';
+    div.innerHTML = `<div class="mm-msg-avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DArdyI0Tgr9wzM2XQWaSxibXD8/hf_20260613_004011_cf8d085f-111b-47ef-8b55-d5ab66ccf14c.jpeg" alt="Maomao" /></div>
+      <div style="width:100%">
+        <div class="mm-bubble" style="margin-bottom:8px;">Fill out this form and we'll get back to you shortly!</div>
+        <div class="mm-callback-form" id="support-form">
+          <input id="sf-name" placeholder="Your name *" />
+          <input id="sf-email" type="email" placeholder="Email address *" />
+          <input id="sf-phone" placeholder="Phone number" />
+          <select id="sf-category" style="border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;font-family:'Public Sans',sans-serif;color:var(--text);outline:none;background:white;">
+            <option value="">Select category *</option>
+            <option value="billing">Billing & Plans</option>
+            <option value="payroll">Payroll Issue</option>
+            <option value="attendance">Attendance & Kiosk</option>
+            <option value="compliance">Statutory Compliance</option>
+            <option value="technical">Technical Issue</option>
+            <option value="callback_request">Callback Request</option>
+            <option value="general">General Inquiry</option>
+          </select>
+          <textarea id="sf-message" placeholder="How can we help? *" rows="3" style="border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;font-family:'Public Sans',sans-serif;color:var(--text);outline:none;resize:none;"></textarea>
+          <button class="mm-contact-btn primary" onclick="submitSupportForm()" style="width:100%;padding:10px;">Submit</button>
+        </div>
+      </div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  async function submitSupportForm() {
+    const name = document.getElementById('sf-name')?.value?.trim() || '';
+    const email = document.getElementById('sf-email')?.value?.trim() || '';
+    const phone = document.getElementById('sf-phone')?.value?.trim() || '';
+    const category = document.getElementById('sf-category')?.value || '';
+    const message = document.getElementById('sf-message')?.value?.trim() || '';
+
+    if (!email || !category || !message) {
+      alert('Please fill in all required fields (email, category, message).'); return;
+    }
+
+    const btn = document.querySelector('#support-form .mm-contact-btn.primary');
+    if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+
+    try {
+      const res = await fetch('/api/support', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, category, message, source: 'chat_widget' })
+      });
+      if (!res.ok) throw new Error('Failed');
+      const form = document.getElementById('support-form');
+      if (form) form.style.display = 'none';
+      addBotMessage(`Thanks${name ? ' '+name : ''}! We've received your message and will get back to you at <strong>${email}</strong> shortly. 😊`);
+    } catch (err) {
+      addBotMessage("Sorry, something went wrong submitting your request. Please email us directly at <a href='mailto:hello@maoworkforce.com'>hello@maoworkforce.com</a>");
+    }
+  }
+
+  function showCallbackForm() {
+    const msgs = document.getElementById('mm-messages');
+    const div = document.createElement('div');
+    div.className = 'mm-msg';
+    div.innerHTML = `<div class="mm-msg-avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DArdyI0Tgr9wzM2XQWaSxibXD8/hf_20260613_004011_cf8d085f-111b-47ef-8b55-d5ab66ccf14c.jpeg" alt="Maomao" /></div>
+      <div style="width:100%">
+        <div class="mm-bubble" style="margin-bottom:8px;">Sure! Leave your details and we'll call you back.</div>
+        <div class="mm-callback-form" id="callback-form">
+          <input id="cb-name" placeholder="Your name *" />
+          <input id="cb-email" type="email" placeholder="Email address *" />
+          <input id="cb-phone" placeholder="Phone number *" />
+          <input id="cb-time" placeholder="Best time to call (e.g. 2-4 PM)" />
+          <button class="mm-contact-btn primary" onclick="submitCallback()" style="width:100%;padding:10px;">Request Callback</button>
+        </div>
+      </div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  async function submitCallback() {
+    const name = document.getElementById('cb-name')?.value?.trim() || '';
+    const email = document.getElementById('cb-email')?.value?.trim() || '';
+    const phone = document.getElementById('cb-phone')?.value?.trim() || '';
+    const time = document.getElementById('cb-time')?.value?.trim() || '';
+
+    if (!name || !email || !phone) { alert('Please fill in your name, email, and phone number.'); return; }
+
+    const btn = document.querySelector('#callback-form .mm-contact-btn.primary');
+    if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+
+    try {
+      const res = await fetch('/api/support', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          category: 'callback_request',
+          message: `Callback requested${time ? '. Best time to call: ' + time : '.'}`,
+          source: 'chat_widget_callback'
+        })
+      });
+      if (!res.ok) throw new Error('Failed');
+      const form = document.getElementById('callback-form');
+      if (form) form.style.display = 'none';
+      addBotMessage(`Thanks ${name}! We'll call you at <strong>${phone}</strong>${time ? ' around ' + time : ''}. Talk soon! 😊`);
+    } catch (err) {
+      addBotMessage("Sorry, something went wrong. Please email us at <a href='mailto:hello@maoworkforce.com'>hello@maoworkforce.com</a>");
+    }
+  }
+
+  function sendQuick(text) { sendMessage(text); }
+
+  async function sendMessage(text) {
+    const input = document.getElementById('mm-input');
+    const msgText = text || input.value.trim();
+    if (!msgText) return;
+
+    input.value = '';
+    input.style.height = 'auto';
+    document.getElementById('mm-send').disabled = true;
+
+    addUserMessage(msgText);
+    messages.push({ role: 'user', content: msgText });
+
+    const typing = addTyping();
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system: SYSTEM_PROMPT,
+          messages: messages
+        })
+      });
+
+      const data = await response.json();
+      const reply = data.content?.[0]?.text || "I'm sorry, I couldn't process that. Please try again.";
+
+      typing.remove();
+      messages.push({ role: 'assistant', content: reply });
+
+      // Check if we should show contact card
+      const needsHuman = reply.toLowerCase().includes('contact support') ||
+        reply.toLowerCase().includes('reach out') ||
+        reply.toLowerCase().includes('hello@maoworkforce') ||
+        reply.toLowerCase().includes("don't have") ||
+        reply.toLowerCase().includes("not sure");
+
+      addBotMessage(reply);
+      if (needsHuman) setTimeout(addContactCard, 500);
+
+    } catch (err) {
+      typing.remove();
+      addBotMessage("Sorry, I'm having trouble connecting right now. Please try again or contact us at hello@maoworkforce.com 😊");
+      addContactCard();
+    }
+
+    document.getElementById('mm-send').disabled = false;
+  }
+
+  // Draggable widget
+  const widget = document.getElementById('maomao-widget');
+  const bubble = document.getElementById('maomao-bubble');
+
+  bubble.addEventListener('mousedown', (e) => {
+    if (e.button !== 0) return;
+    isDragging = false;
+    dragStart = { x: e.clientX, y: e.clientY, right: parseInt(widget.style.right||24), bottom: parseInt(widget.style.bottom||24) };
+    const onMove = (e) => {
+      const dx = e.clientX - dragStart.x;
+      const dy = e.clientY - dragStart.y;
+      if (Math.abs(dx) > 5 || Math.abs(dy) > 5) isDragging = true;
+      if (isDragging) {
+        widget.style.right = Math.max(8, dragStart.right - dx) + 'px';
+        widget.style.bottom = Math.max(8, dragStart.bottom - dy) + 'px';
+      }
+    };
+    const onUp = () => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  });
+
+  bubble.addEventListener('click', (e) => { if (isDragging) { isDragging = false; e.stopPropagation(); } });
+</script>
+
 </body>
 </html>
