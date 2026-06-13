@@ -1263,6 +1263,10 @@
   }
   .mm-msg.user .mm-bubble { background: var(--heritage); color: white; border-color: var(--heritage); border-radius: 16px 16px 4px 16px; }
   .mm-msg:not(.user) .mm-bubble { border-radius: 16px 16px 16px 4px; }
+  .mm-bubble p { margin: 0 0 6px; }
+  .mm-bubble p:last-child { margin-bottom: 0; }
+  .mm-bubble strong { font-weight: 700; color: var(--heritage); }
+  .mm-msg.user .mm-bubble strong { color: white; }
   .mm-bubble a { color: var(--terracotta); font-weight: 600; }
   .mm-typing { display: flex; gap: 4px; align-items: center; padding: 4px 2px; }
   .mm-typing span { width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; animation: mmBounce 1.2s infinite; }
@@ -1407,6 +1411,16 @@ If you don't know something specific about MAO Workforce or the user needs human
     }
   }
 
+  function formatMessage(text) {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>')
+      .replace(/^/, '<p>')
+      .replace(/$/, '</p>');
+  }
+
   function addBotMessage(text, quickReplies = []) {
     const msgs = document.getElementById('mm-messages');
     const div = document.createElement('div');
@@ -1414,7 +1428,7 @@ If you don't know something specific about MAO Workforce or the user needs human
     div.innerHTML = `
       <div class="mm-msg-avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DArdyI0Tgr9wzM2XQWaSxibXD8/hf_20260613_004011_cf8d085f-111b-47ef-8b55-d5ab66ccf14c.jpeg" alt="Maomao" /></div>
       <div>
-        <div class="mm-bubble">${text}</div>
+        <div class="mm-bubble">${formatMessage(text)}</div>
         ${quickReplies.length ? `<div class="mm-quick-replies">${quickReplies.map(q=>`<button class="mm-qr" onclick="sendQuick('${q}')">${q}</button>`).join('')}</div>` : ''}
       </div>`;
     msgs.appendChild(div);
