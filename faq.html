@@ -5,366 +5,243 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Help Center — MAO Workforce</title>
   <meta name="description" content="Answers to common questions about MAO Workforce — payroll, attendance, compliance, and getting started." />
-  <meta property="og:title" content="Help Center — MAO Workforce" />
-  <meta property="og:description" content="Everything you need to know about running payroll and managing your team with MAO Workforce." />
-  <meta property="og:url" content="https://maoworkforce.com/faq" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink:       #1a1a18;
-      --muted:     #6b6b63;
-      --rule:      #e4e2da;
-      --bg:        #faf9f6;
-      --card:      #ffffff;
-      --accent:    #c0392b;
-      --accent-bg: #fdf3f2;
-      --green:     #1e6b45;
-      --green-bg:  #f0f7f3;
+      --heritage:    #06231c;
+      --terracotta:  #bf4b2e;
+      --terra-light: #d46140;
+      --parchment:   #fdfaf4;
+      --parch-deep:  #f5f1e8;
+      --parch-mid:   #f0eee9;
+      --text:        #2a2825;
+      --text-muted:  #6b665e;
+      --border:      #e5e0d5;
+      --on-heritage: #e8efeb;
+      --white:       #ffffff;
+      --green:       #1a4d2e;
+      --green-bg:    #eef6f0;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
+      font-family: 'Public Sans', system-ui, sans-serif;
+      background: var(--parchment);
+      color: var(--text);
       font-size: 16px;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--bg);
-      border-bottom: 1px solid var(--rule);
-      padding: 0 24px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(253,250,244,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
     }
     .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem;
-      color: var(--ink);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700; font-size: 18px; color: var(--heritage); text-decoration: none;
     }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color 0.15s;
+    .nav-logo img { height: 32px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: var(--text); }
+    .btn-nav {
+      background: var(--terracotta); color: white !important;
+      padding: 9px 20px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: background 0.2s;
+      border: 2px solid var(--terracotta);
     }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-cta {
-      background: var(--ink);
-      color: #fff !important;
-      padding: 8px 18px;
-      border-radius: 6px;
-      font-size: 0.875rem !important;
-    }
-    .nav-cta:hover { background: var(--accent) !important; color: #fff !important; }
+    .btn-nav:hover { background: var(--terra-light) !important; border-color: var(--terra-light); }
 
-    /* ── HERO ── */
+    /* HERO */
     .help-hero {
+      padding: 120px 5% 64px;
       text-align: center;
-      padding: 72px 24px 48px;
-      border-bottom: 1px solid var(--rule);
+      background: var(--heritage);
+      border-bottom: 1px solid rgba(232,239,235,0.1);
     }
-    .help-hero-eyebrow {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
+    .help-eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: 16px;
     }
     .help-hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      line-height: 1.15;
-      color: var(--ink);
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--on-heritage); font-weight: 700;
       margin-bottom: 16px;
     }
     .help-hero p {
-      color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 480px;
-      margin: 0 auto 32px;
+      color: rgba(232,239,235,0.6); font-size: 16px;
+      max-width: 480px; margin: 0 auto 36px; line-height: 1.75;
     }
-    .search-bar {
-      display: flex;
-      max-width: 480px;
-      margin: 0 auto;
-      border: 1.5px solid var(--rule);
-      border-radius: 8px;
-      overflow: hidden;
-      background: var(--card);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    .search-wrap {
+      display: flex; max-width: 520px; margin: 0 auto;
+      background: white; border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
-    .search-bar input {
-      flex: 1;
-      border: none;
-      outline: none;
-      padding: 12px 16px;
-      font-size: 0.95rem;
-      font-family: 'Inter', sans-serif;
+    .search-wrap input {
+      flex: 1; border: none; outline: none;
+      padding: 14px 18px; font-size: 15px;
+      font-family: 'Public Sans', sans-serif; color: var(--text);
       background: transparent;
-      color: var(--ink);
     }
-    .search-bar input::placeholder { color: var(--muted); }
-    .search-bar button {
-      background: var(--ink);
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: background 0.15s;
+    .search-wrap input::placeholder { color: var(--text-muted); }
+    .search-wrap button {
+      background: var(--terracotta); color: white; border: none;
+      padding: 14px 22px; font-size: 14px; font-weight: 600;
+      cursor: pointer; font-family: 'Public Sans', sans-serif;
+      transition: background 0.2s;
     }
-    .search-bar button:hover { background: var(--accent); }
+    .search-wrap button:hover { background: var(--terra-light); }
 
-    /* ── LAYOUT ── */
+    /* LAYOUT */
     .help-layout {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 48px 24px 96px;
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 48px;
-      align-items: start;
+      max-width: 1200px; margin: 0 auto;
+      padding: 56px 5% 96px;
+      display: grid; grid-template-columns: 220px 1fr;
+      gap: 56px; align-items: start;
     }
 
-    /* ── SIDEBAR ── */
-    .help-sidebar {
-      position: sticky;
-      top: 80px;
-    }
+    /* SIDEBAR */
+    .help-sidebar { position: sticky; top: 84px; }
     .sidebar-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
     }
     .sidebar-nav { list-style: none; }
     .sidebar-nav li { margin-bottom: 2px; }
     .sidebar-nav a {
-      display: block;
-      padding: 7px 12px;
-      border-radius: 6px;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.15s;
+      display: block; padding: 8px 12px; border-radius: 8px;
+      color: var(--text-muted); text-decoration: none;
+      font-size: 14px; font-weight: 500; transition: all 0.15s;
     }
     .sidebar-nav a:hover,
     .sidebar-nav a.active {
-      background: var(--accent-bg);
-      color: var(--accent);
+      background: var(--parch-deep); color: var(--heritage);
     }
-    .sidebar-divider {
-      border: none;
-      border-top: 1px solid var(--rule);
-      margin: 16px 0;
-    }
+    .sidebar-nav a.active { font-weight: 600; border-left: 3px solid var(--terracotta); border-radius: 0 8px 8px 0; }
+    .sidebar-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
     .sidebar-contact {
-      background: var(--green-bg);
-      border-radius: 8px;
-      padding: 16px;
-      margin-top: 24px;
+      background: var(--green-bg); border: 1px solid rgba(26,77,46,0.15);
+      border-radius: 10px; padding: 16px; margin-top: 24px;
     }
-    .sidebar-contact p {
-      font-size: 0.8rem;
-      color: var(--green);
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .sidebar-contact a {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--green);
-      text-decoration: none;
-      margin-top: 4px;
-    }
+    .sidebar-contact p { font-size: 12px; color: var(--green); font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .sidebar-contact a { display: block; font-size: 13px; color: var(--green); text-decoration: none; margin-top: 4px; }
     .sidebar-contact a:hover { text-decoration: underline; }
 
-    /* ── FAQ SECTIONS ── */
+    /* FAQ SECTIONS */
     .help-content { min-width: 0; }
-
-    .faq-section {
-      margin-bottom: 56px;
-      scroll-margin-top: 80px;
-    }
+    .faq-section { margin-bottom: 56px; scroll-margin-top: 84px; }
     .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--rule);
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px; padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
     }
     .section-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: var(--accent-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--heritage); display: flex; align-items: center;
+      justify-content: center; font-size: 18px; flex-shrink: 0;
     }
     .faq-section h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem;
-      color: var(--ink);
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 22px; color: var(--heritage); font-weight: 700;
     }
 
-    /* ── ACCORDION ── */
+    /* ACCORDION */
     .faq-item {
-      border: 1px solid var(--rule);
-      border-radius: 8px;
-      margin-bottom: 8px;
-      overflow: hidden;
-      background: var(--card);
-      transition: box-shadow 0.15s;
+      border-bottom: 1px solid var(--border);
+      background: white;
     }
-    .faq-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .faq-item:first-child { border-radius: 12px 12px 0 0; }
+    .faq-item:last-child { border-radius: 0 0 12px 12px; border-bottom: none; }
+    .faq-item:only-child { border-radius: 12px; border-bottom: none; }
+    .faq-list {
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
     .faq-question {
-      width: 100%;
-      background: none;
-      border: none;
-      text-align: left;
-      padding: 16px 20px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--ink);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      font-family: 'Inter', sans-serif;
-      line-height: 1.4;
+      width: 100%; background: none; border: none; text-align: left;
+      padding: 18px 24px; font-size: 15px; font-weight: 600; color: var(--heritage);
+      cursor: pointer; display: flex; justify-content: space-between;
+      align-items: center; gap: 12px; font-family: 'Public Sans', sans-serif;
+      line-height: 1.4; transition: background 0.15s;
     }
-    .faq-question:hover { color: var(--accent); }
+    .faq-question:hover { background: var(--parch-deep); }
     .faq-chevron {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      color: var(--muted);
-      transition: transform 0.2s;
+      width: 18px; height: 18px; flex-shrink: 0;
+      color: var(--text-muted); transition: transform 0.2s;
     }
     .faq-item.open .faq-chevron { transform: rotate(180deg); }
-    .faq-item.open .faq-question { color: var(--accent); }
+    .faq-item.open .faq-question { background: var(--parch-deep); color: var(--terracotta); }
     .faq-answer {
-      display: none;
-      padding: 0 20px 18px;
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-      border-top: 1px solid var(--rule);
-      padding-top: 14px;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 24px; background: var(--parch-deep);
     }
-    .faq-item.open .faq-answer { display: block; }
-    .faq-answer a { color: var(--accent); text-decoration: none; }
+    .faq-item.open .faq-answer { max-height: 300px; padding: 0 24px 20px; }
+    .faq-answer p { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+    .faq-answer a { color: var(--terracotta); text-decoration: none; }
     .faq-answer a:hover { text-decoration: underline; }
-    .faq-answer ul {
-      margin: 10px 0 4px 18px;
-    }
-    .faq-answer li { margin-bottom: 4px; }
-    .faq-answer strong { color: var(--ink); }
+    .faq-answer ul { margin: 10px 0 4px 18px; }
+    .faq-answer li { margin-bottom: 4px; font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+    .faq-answer strong { color: var(--text); }
 
-    /* ── STILL NEED HELP BANNER ── */
+    /* STILL NEED HELP */
     .help-banner {
-      background: var(--ink);
-      border-radius: 12px;
-      padding: 40px 32px;
-      text-align: center;
-      margin-top: 16px;
+      background: var(--heritage); border-radius: 16px;
+      padding: 48px 40px; text-align: center; margin-top: 16px;
     }
     .help-banner h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
-      color: #fff;
-      margin-bottom: 8px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 28px; color: var(--on-heritage); font-weight: 700; margin-bottom: 8px;
     }
-    .help-banner p {
-      color: rgba(255,255,255,0.65);
-      font-size: 0.9rem;
-      margin-bottom: 24px;
+    .help-banner p { color: rgba(232,239,235,0.6); font-size: 15px; margin-bottom: 28px; }
+    .help-banner-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-banner-primary {
+      background: var(--terracotta); color: white;
+      padding: 12px 26px; border-radius: 9px;
+      font-weight: 600; font-size: 14px; text-decoration: none;
+      transition: background 0.2s; font-family: 'Public Sans', sans-serif;
     }
-    .help-banner-btns {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
+    .btn-banner-primary:hover { background: var(--terra-light); }
+    .btn-banner-ghost {
+      background: transparent; color: var(--on-heritage);
+      padding: 12px 26px; border-radius: 9px;
+      font-weight: 500; font-size: 14px; text-decoration: none;
+      border: 1.5px solid rgba(232,239,235,0.25);
+      transition: border-color 0.2s; font-family: 'Public Sans', sans-serif;
     }
-    .btn-white {
-      background: #fff;
-      color: var(--ink);
-      padding: 10px 22px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.875rem;
-      text-decoration: none;
-      transition: opacity 0.15s;
-    }
-    .btn-white:hover { opacity: 0.85; }
-    .btn-ghost {
-      background: transparent;
-      color: #fff;
-      padding: 10px 22px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.875rem;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.3);
-      transition: border-color 0.15s;
-    }
-    .btn-ghost:hover { border-color: #fff; }
+    .btn-banner-ghost:hover { border-color: rgba(232,239,235,0.5); }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--rule);
-      padding: 32px 24px;
-      text-align: center;
+    /* FOOTER */
+    footer { background: var(--heritage); padding: 40px 5%; }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
     }
-    footer p {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--ink); }
+    .footer-bottom p { font-size: 13px; color: rgba(232,239,235,0.35); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: rgba(232,239,235,0.35); text-decoration: none; }
+    .footer-links a:hover { color: rgba(232,239,235,0.65); }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .help-layout {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-      .help-sidebar {
-        position: static;
-        display: none;
-      }
+      .help-layout { grid-template-columns: 1fr; gap: 32px; }
+      .help-sidebar { position: static; display: none; }
+      .help-banner { padding: 36px 24px; }
     }
   </style>
 </head>
@@ -372,20 +249,25 @@
 
 <!-- NAV -->
 <nav>
-  <a href="/" class="nav-logo">MAO <span>Workforce</span></a>
+  <a href="/" class="nav-logo">
+    <img src="https://gnwfrffneehpknyaygeb.supabase.co/storage/v1/object/public/assets/MAO%20Workforce%20Logo-4.png" alt="MAO Workforce" style="height:36px;width:auto;border-radius:4px;" />
+    MAO Workforce
+  </a>
   <div class="nav-links">
     <a href="/">Home</a>
-    <a href="/faq">Help</a>
-    <a href="https://portal.maoworkforce.com" class="nav-cta">Sign In</a>
+    <a href="#features" style="display:none"></a>
+    <a href="/faq" style="color: var(--text);">Help</a>
+    <a href="https://portal.maoworkforce.com">Log in</a>
+    <a href="https://portal.maoworkforce.com" class="btn-nav">Start free</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="help-hero">
-  <span class="help-hero-eyebrow">Help Center</span>
+  <div class="help-eyebrow">Help Center</div>
   <h1>How can we help?</h1>
   <p>Find answers about payroll, attendance, compliance, and getting your team set up on MAO.</p>
-  <div class="search-bar">
+  <div class="search-wrap">
     <input type="text" id="faq-search" placeholder="Search questions…" oninput="filterFAQ(this.value)" />
     <button type="button">Search</button>
   </div>
@@ -423,54 +305,26 @@
         <div class="section-icon">🚀</div>
         <h2>Getting Started</h2>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          What is MAO Workforce?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          MAO Workforce is a Filipino HR and payroll platform built for small and medium businesses. It handles employee scheduling, attendance tracking, payroll computation (including SSS, PhilHealth, Pag-IBIG, and withholding tax), and government compliance reports — all in one place.
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">What is MAO Workforce?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>MAO Workforce is a Filipino HR and payroll platform built for small and medium businesses. It handles employee scheduling, attendance tracking, payroll computation (including SSS, PhilHealth, Pag-IBIG, and withholding tax), and government compliance reports — all in one place.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          How do I create an account?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Go to <a href="https://portal.maoworkforce.com">portal.maoworkforce.com</a> and click <strong>Create Account</strong>. Enter your business name, email, and password. You'll start on the Free plan — no credit card required.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">How do I create an account?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Go to <a href="https://portal.maoworkforce.com">portal.maoworkforce.com</a> and click <strong>Create Account</strong>. Enter your business name, email, and password. You'll start on the Free plan — no credit card required.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          How do I add my employees?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Go to <strong>Workforce → Employees</strong> and click <strong>+ Add Employee</strong>. Fill in their name, employee code, branch, role, and salary details. You can also invite them via email so they can access the Employee Self-Service portal.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">How do I add my employees?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Go to <strong>Workforce → Employees</strong> and click <strong>+ Add Employee</strong>. Fill in their name, employee code, branch, role, and salary details. You can also invite them via email so they can access the Employee Self-Service portal.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Can I migrate from my current payroll system?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. You can manually add your existing employees and their salary details. Historical payroll records can be uploaded as needed. If you need help migrating a large team, email us at <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a> and we'll assist.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Can I migrate from my current payroll system?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. You can manually add your existing employees and their salary details. If you need help migrating a large team, email us at <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a> and we'll assist.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Is there a mobile app?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          The MAO portal is fully mobile-responsive and works on any browser. We also offer <strong>MAO Kiosk</strong> — a dedicated tablet/device app for employees to clock in and out without needing a personal device.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Is there a mobile app?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>The MAO portal is fully mobile-responsive and works on any browser. We also offer <strong>MAO Kiosk</strong> — a dedicated tablet app for employees to clock in and out without needing a personal device.</p></div>
         </div>
       </div>
     </section>
@@ -481,68 +335,26 @@
         <div class="section-icon">💰</div>
         <h2>Payroll</h2>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          What payroll schedules are supported?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          MAO supports <strong>weekly, semi-monthly, and monthly</strong> payroll cutoffs. Each payroll cutoff can be customized with its own start and end dates.
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">What payroll schedules are supported?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>MAO supports <strong>weekly, semi-monthly, and monthly</strong> payroll cutoffs. Each payroll cutoff can be customized with its own start and end dates.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          How does MAO compute payroll?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          MAO pulls each employee's attendance logs for the cutoff period and computes:
-          <ul>
-            <li>Regular hours, overtime (OT), night differential (ND)</li>
-            <li>Late deductions and undertime</li>
-            <li>Holiday pay (regular and special)</li>
-            <li>Allowances (monthly or semi-monthly)</li>
-            <li>Statutory deductions: SSS, PhilHealth, Pag-IBIG, and withholding tax</li>
-            <li>Manual deductions (loans, cash advances)</li>
-          </ul>
-          The result is a payslip for each employee that you can review before releasing.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">How does MAO compute payroll?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>MAO pulls each employee's attendance logs for the cutoff period and computes regular hours, overtime (OT), night differential (ND), late deductions, holiday pay, allowances, and all statutory deductions (SSS, PhilHealth, Pag-IBIG, BIR withholding). The result is a payslip per employee that you review before releasing.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Can I edit a payroll draft before releasing it?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. After generating a payroll draft, you can review each employee's payslip, make manual adjustments, and re-generate before approving and releasing.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Can I edit a payroll draft before releasing it?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. After generating a payroll draft, you can review each employee's payslip, make manual adjustments, and re-generate before approving and releasing.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          How do allowances work?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Allowances are set per employee under their salary record. You can choose:
-          <ul>
-            <li><strong>Monthly</strong> — paid once a month on a scheduled day</li>
-            <li><strong>Semi-monthly</strong> — the total amount is split in half and paid twice a month (e.g. on the 15th and last day)</li>
-          </ul>
-          Allowances can be taxable or non-taxable.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">How do allowances work?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Allowances are set per employee under their salary record. <strong>Monthly</strong> allowances are paid once a month; <strong>semi-monthly</strong> allowances split the total in half and pay twice a month (e.g. on the 15th and last day). Allowances can be taxable or non-taxable.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Can I run a special payroll (e.g. 13th month, bonus)?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. MAO supports special payroll runs (SPD) for 13th month pay, bonuses, and other one-time payouts, separate from your regular payroll cycle.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Can I run a special payroll (e.g. 13th month, bonus)?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. MAO supports special payroll runs (SPD) for 13th month pay, bonuses, and other one-time payouts, separate from your regular payroll cycle.</p></div>
         </div>
       </div>
     </section>
@@ -553,58 +365,26 @@
         <div class="section-icon">🕐</div>
         <h2>Attendance</h2>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          How do employees clock in and out?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Employees can clock in via:
-          <ul>
-            <li><strong>MAO Kiosk</strong> — a shared tablet at your location, using employee code, PIN, or QR code</li>
-            <li><strong>Employee Self-Service portal</strong> — from any browser on their phone or computer</li>
-          </ul>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">How do employees clock in and out?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Employees can clock in via <strong>MAO Kiosk</strong> (a shared tablet at your location, using employee code, PIN, or QR code) or via the <strong>Employee Self-Service portal</strong> from any browser on their phone or computer.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          What happens if an employee forgets to clock out?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          The attendance log stays <strong>Open</strong> until a clock-out is recorded. Employees can submit a <strong>Correction Request</strong> for a missed clock-out, which an HR admin can approve. Once approved, the log is updated and payroll hours are recomputed.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">What happens if an employee forgets to clock out?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>The attendance log stays <strong>Open</strong> until a clock-out is recorded. Employees can submit a <strong>Correction Request</strong> for a missed clock-out, which an HR admin can approve. Once approved, the log is updated and payroll hours are recomputed.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Can admins manually add or edit attendance records?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. HR admins and branch managers can add manual attendance entries, edit existing logs, or delete records from the <strong>Attendance → Logs</strong> page.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Can admins manually add or edit attendance records?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. HR admins and branch managers can add manual attendance entries, edit existing logs, or delete records from the <strong>Attendance → Logs</strong> page.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          How does overtime work?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          MAO detects pre-shift and post-shift overtime automatically based on the employee's assigned schedule. Detected overtime appears in <strong>Attendance → Exceptions</strong> and must be approved by an admin before it's counted in payroll.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">How does overtime work?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>MAO detects pre-shift and post-shift overtime automatically based on the employee's assigned schedule. Detected overtime appears in <strong>Attendance → Exceptions</strong> and must be approved by an admin before it's counted in payroll.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          What is night differential (ND)?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Night differential covers hours worked between <strong>10:00 PM and 6:00 AM</strong>, which are entitled to an additional 10% pay under Philippine labor law. MAO computes ND hours automatically from clock-in/out records.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">What is night differential (ND)?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Night differential covers hours worked between <strong>10:00 PM and 6:00 AM</strong>, entitled to an additional 10% pay under Philippine labor law. MAO computes ND hours automatically from clock-in/out records.</p></div>
         </div>
       </div>
     </section>
@@ -615,44 +395,22 @@
         <div class="section-icon">🏛️</div>
         <h2>Compliance (BIR / SSS / PhilHealth / Pag-IBIG)</h2>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Does MAO automatically compute SSS, PhilHealth, and Pag-IBIG?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. MAO uses the current contribution tables for SSS, PhilHealth, and Pag-IBIG and automatically computes both employee and employer shares during payroll generation. Contribution tables are updated when government rates change.
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Does MAO automatically compute SSS, PhilHealth, and Pag-IBIG?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. MAO uses the current contribution tables and automatically computes both employee and employer shares during payroll generation. Contribution tables are updated when government rates change.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Does MAO compute withholding tax (BIR)?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. MAO computes monthly withholding tax using the BIR tax table based on each employee's gross taxable income. <strong>Note:</strong> MAO provides computation assistance — you remain responsible for filing and remittance to BIR directly.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Does MAO compute withholding tax (BIR)?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. MAO computes monthly withholding tax using the BIR TRAIN Law table based on each employee's gross taxable income. <strong>Note:</strong> MAO provides computation assistance — you remain responsible for filing and remittance to BIR directly.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Can I export reports for government remittance?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. MAO generates statutory reports showing SSS, PhilHealth, Pag-IBIG, and withholding tax summaries per payroll period, which you can use to prepare your remittance forms.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Can I export reports for government remittance?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. MAO generates statutory reports showing SSS, PhilHealth, Pag-IBIG, and withholding tax summaries per payroll period, which you can use to prepare your remittance forms.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Does MAO handle 13th month pay computation?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. You can run a special payroll for 13th month pay. MAO computes the amount based on each employee's basic salary and months of service within the calendar year.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Does MAO handle 13th month pay computation?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. You can run a special payroll for 13th month pay. MAO computes the amount based on each employee's basic salary and months of service within the calendar year.</p></div>
         </div>
       </div>
     </section>
@@ -663,51 +421,22 @@
         <div class="section-icon">👥</div>
         <h2>Managing Employees</h2>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Can employees see their own payslips?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. Once invited, employees can log in to the MAO Employee Self-Service portal to view their payslips, attendance records, leave balances, and submit requests.
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Can employees see their own payslips?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. Once invited, employees can log in to the MAO Employee Self-Service portal to view their payslips, attendance records, leave balances, and submit requests.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          How do I invite an employee to the portal?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Go to <strong>Workforce → Employees</strong>, open the employee's profile, and click <strong>Invite to Portal</strong>. They'll receive an email with a link to set up their account.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">How do I invite an employee to the portal?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Go to <strong>Workforce → Employees</strong>, open the employee's profile, and click <strong>Invite to Portal</strong>. They'll receive an email with a link to set up their account.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Can I manage multiple branches?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. MAO supports multiple branches under one business account. Employees are assigned to a branch, and you can filter attendance, payroll, and reports by branch.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Can I manage multiple branches?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. MAO supports multiple branches under one business account. Employees are assigned to a branch, and you can filter attendance, payroll, and reports by branch.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          What roles can I assign to staff in MAO?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          MAO has these access levels:
-          <ul>
-            <li><strong>Tenant Owner</strong> — full access to everything</li>
-            <li><strong>HR Admin</strong> — manages employees, attendance, and payroll</li>
-            <li><strong>Payroll Admin</strong> — manages payroll runs and reports</li>
-            <li><strong>Branch Manager</strong> — manages their branch's attendance and scheduling</li>
-            <li><strong>Employee</strong> — self-service access only</li>
-          </ul>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">What roles can I assign to staff in MAO?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>MAO has these access levels: <strong>Tenant Owner</strong> (full access), <strong>HR Admin</strong> (employees, attendance, payroll), <strong>Payroll Admin</strong> (payroll runs and reports), <strong>Branch Manager</strong> (their branch only), and <strong>Employee</strong> (self-service only).</p></div>
         </div>
       </div>
     </section>
@@ -718,50 +447,18 @@
         <div class="section-icon">💳</div>
         <h2>Plans & Billing</h2>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Is there a free plan?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. The <strong>Free plan</strong> is free forever and covers the basics for very small teams. No credit card required to sign up.
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Is there a free plan?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. The <strong>Free plan</strong> is free forever and covers the basics for very small teams. No credit card required to sign up.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          What are the paid plan options?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          <ul>
-            <li><strong>Starter — ₱499/mo</strong>: for small teams getting started</li>
-            <li><strong>Growth — ₱999/mo</strong>: includes a 30-day free trial</li>
-            <li><strong>Pro — ₱1,999/mo</strong>: for growing businesses with advanced needs</li>
-            <li><strong>Enterprise</strong>: custom pricing for large or multi-entity businesses</li>
-          </ul>
-          Visit <a href="/#pricing">our pricing page</a> for the full feature breakdown.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">What are the paid plan options?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p><strong>Starter — ₱499/mo</strong>, <strong>Growth — ₱999/mo</strong> (30-day free trial), <strong>Pro — ₱1,999/mo</strong>, and <strong>Enterprise</strong> (custom). Visit <a href="/#pricing">our pricing page</a> for the full feature breakdown.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Can I cancel anytime?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. There are no long-term contracts. You can cancel your subscription at any time from your account settings. Your data remains accessible until the end of your billing period.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          What payment methods are accepted?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          We accept major credit and debit cards. For Enterprise plans, bank transfer options are available. Contact <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a> for details.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Can I cancel anytime?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. No long-term contracts. Cancel anytime from your account settings. Your data remains accessible until the end of your billing period.</p></div>
         </div>
       </div>
     </section>
@@ -772,34 +469,18 @@
         <div class="section-icon">🔒</div>
         <h2>Security & Data</h2>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Is my data safe?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. MAO runs on Supabase infrastructure with row-level security — each business's data is strictly isolated. All data is encrypted in transit (TLS) and at rest. We do not share or sell your data to third parties.
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Is my data safe?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. MAO runs on Supabase infrastructure with row-level security — each business's data is strictly isolated. All data is encrypted in transit (TLS) and at rest. We never share or sell your data.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Is MAO compliant with the Philippine Data Privacy Act?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. MAO is designed in accordance with the Data Privacy Act of 2012 (RA 10173). See our <a href="/privacy.html">Privacy Policy</a> for the full details on how we collect, use, and protect your data.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Is MAO compliant with the Philippine Data Privacy Act?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. MAO is designed in accordance with the Data Privacy Act of 2012 (RA 10173). See our <a href="/privacy">Privacy Policy</a> for details on how we collect, use, and protect your data.</p></div>
         </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-          Can I export or download my data?
-          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
-        </button>
-        <div class="faq-answer">
-          Yes. Payroll reports, payslips, and attendance summaries can be exported. If you need a full data export, contact us at <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a>.
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">Can I export or download my data?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p>Yes. Payroll reports, payslips, and attendance summaries can be exported. For a full data export, contact us at <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a>.</p></div>
         </div>
       </div>
     </section>
@@ -809,8 +490,8 @@
       <h3>Still have questions?</h3>
       <p>Our team is happy to help. Reach out and we'll get back to you within one business day.</p>
       <div class="help-banner-btns">
-        <a href="mailto:hello@maoworkforce.com" class="btn-white">Email us</a>
-        <a href="https://portal.maoworkforce.com" class="btn-ghost">Go to the portal</a>
+        <a href="mailto:hello@maoworkforce.com" class="btn-banner-primary">Email us</a>
+        <a href="https://portal.maoworkforce.com" class="btn-banner-ghost">Go to the portal</a>
       </div>
     </div>
 
@@ -819,35 +500,37 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 MAO Workforce | Powered by LeviO. &nbsp;·&nbsp; <a href="/">Home</a> &nbsp;·&nbsp; <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp; <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a></p>
+  <div class="footer-bottom">
+    <p>© 2026 MAO Workforce | Powered by LeviO. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a>
+    </div>
+  </div>
 </footer>
 
 <script>
-  // Accordion toggle
   function toggleFAQ(btn) {
     const item = btn.closest('.faq-item');
     const isOpen = item.classList.contains('open');
-    // Close all
     document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-    // Open this one if it wasn't open
     if (!isOpen) item.classList.add('open');
   }
 
-  // Search filter
   function filterFAQ(query) {
     const q = query.toLowerCase().trim();
     document.querySelectorAll('.faq-item').forEach(item => {
       const text = item.textContent.toLowerCase();
       item.style.display = (!q || text.includes(q)) ? '' : 'none';
     });
-    // Show/hide section headers based on whether they have visible items
     document.querySelectorAll('.faq-section').forEach(section => {
       const visible = [...section.querySelectorAll('.faq-item')].some(i => i.style.display !== 'none');
       section.style.display = visible ? '' : 'none';
     });
   }
 
-  // Sidebar active state on scroll
   const sections = document.querySelectorAll('.faq-section');
   const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
   window.addEventListener('scroll', () => {
