@@ -1488,6 +1488,7 @@ If you don't know something specific about MAO Workforce or the user needs human
             <option value="attendance">Attendance & Kiosk</option>
             <option value="compliance">Statutory Compliance</option>
             <option value="technical">Technical Issue</option>
+            <option value="callback_request">Callback Request</option>
             <option value="general">General Inquiry</option>
           </select>
           <textarea id="sf-message" placeholder="How can we help? *" rows="3" style="border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;font-family:'Public Sans',sans-serif;color:var(--text);outline:none;resize:none;"></textarea>
@@ -1532,25 +1533,51 @@ If you don't know something specific about MAO Workforce or the user needs human
     const div = document.createElement('div');
     div.className = 'mm-msg';
     div.innerHTML = `<div class="mm-msg-avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DArdyI0Tgr9wzM2XQWaSxibXD8/hf_20260613_004011_cf8d085f-111b-47ef-8b55-d5ab66ccf14c.jpeg" alt="Maomao" /></div>
-      <div>
-        <div class="mm-bubble">Sure! Leave your details and we'll call you back.</div>
-        <div class="mm-callback-form">
-          <input id="cb-name" placeholder="Your name" />
-          <input id="cb-phone" placeholder="Phone number" />
+      <div style="width:100%">
+        <div class="mm-bubble" style="margin-bottom:8px;">Sure! Leave your details and we'll call you back.</div>
+        <div class="mm-callback-form" id="callback-form">
+          <input id="cb-name" placeholder="Your name *" />
+          <input id="cb-email" type="email" placeholder="Email address *" />
+          <input id="cb-phone" placeholder="Phone number *" />
           <input id="cb-time" placeholder="Best time to call (e.g. 2-4 PM)" />
-          <button class="mm-contact-btn primary" onclick="submitCallback()" style="width:100%;padding:8px;">Submit Request</button>
+          <button class="mm-contact-btn primary" onclick="submitCallback()" style="width:100%;padding:10px;">Request Callback</button>
         </div>
       </div>`;
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
   }
 
-  function submitCallback() {
-    const name = document.getElementById('cb-name')?.value || '';
-    const phone = document.getElementById('cb-phone')?.value || '';
-    const time = document.getElementById('cb-time')?.value || '';
-    if (!name || !phone) { alert('Please fill in your name and phone number.'); return; }
-    addBotMessage(`Thanks ${name}! We'll call you at ${phone}${time ? ' around '+time : ''}. Talk soon! 😊`);
+  async function submitCallback() {
+    const name = document.getElementById('cb-name')?.value?.trim() || '';
+    const email = document.getElementById('cb-email')?.value?.trim() || '';
+    const phone = document.getElementById('cb-phone')?.value?.trim() || '';
+    const time = document.getElementById('cb-time')?.value?.trim() || '';
+
+    if (!name || !email || !phone) { alert('Please fill in your name, email, and phone number.'); return; }
+
+    const btn = document.querySelector('#callback-form .mm-contact-btn.primary');
+    if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+
+    try {
+      const res = await fetch('/api/support', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          category: 'callback_request',
+          message: `Callback requested${time ? '. Best time to call: ' + time : '.'}`,
+          source: 'chat_widget_callback'
+        })
+      });
+      if (!res.ok) throw new Error('Failed');
+      const form = document.getElementById('callback-form');
+      if (form) form.style.display = 'none';
+      addBotMessage(`Thanks ${name}! We'll call you at <strong>${phone}</strong>${time ? ' around ' + time : ''}. Talk soon! 😊`);
+    } catch (err) {
+      addBotMessage("Sorry, something went wrong. Please email us at <a href='mailto:hello@maoworkforce.com'>hello@maoworkforce.com</a>");
+    }
   }
 
   function sendQuick(text) { sendMessage(text); }
