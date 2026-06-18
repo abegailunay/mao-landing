@@ -1,0 +1,465 @@
+import os
+
+base = os.path.expanduser('~/mao-landing')
+
+dpa_html = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Processing Agreement | MAO Workforce</title>
+  <meta name="description" content="Data Processing Agreement between MAO Workforce and its business customers, governing the processing of personal data under RA 10173." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --heritage:    #06231c;
+      --terracotta:  #bf4b2e;
+      --terra-light: #d46140;
+      --parchment:   #fdfaf4;
+      --parch-deep:  #f5f1e8;
+      --text:        #2a2825;
+      --text-muted:  #6b665e;
+      --border:      #e5e0d5;
+      --on-heritage: #e8efeb;
+    }
+    body { font-family: "Public Sans", sans-serif; background: var(--parchment); color: var(--text); }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--heritage);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--on-heritage); text-decoration: none;
+      font-family: "Fraunces", serif; font-size: 18px; font-weight: 700;
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: var(--on-heritage); text-decoration: none; font-size: 14px; opacity: 0.85; }
+    .nav-links a:hover { opacity: 1; }
+    .btn-nav {
+      background: var(--terracotta); color: white !important;
+      padding: 8px 18px; border-radius: 8px; font-weight: 600; opacity: 1 !important;
+    }
+
+    .page-hero {
+      background: var(--heritage);
+      padding: 64px 40px 56px;
+    }
+    .page-hero-inner { max-width: 760px; margin: 0 auto; }
+    .page-hero h1 {
+      font-family: "Fraunces", serif;
+      font-size: clamp(32px, 4vw, 48px);
+      color: var(--on-heritage); font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .page-hero p { color: rgba(232,239,235,0.65); font-size: 16px; line-height: 1.6; }
+    .page-hero .meta {
+      margin-top: 24px; padding-top: 20px;
+      border-top: 1px solid rgba(232,239,235,0.12);
+      display: flex; gap: 32px; flex-wrap: wrap;
+    }
+    .page-hero .meta span { font-size: 13px; color: rgba(232,239,235,0.5); }
+    .page-hero .meta strong { color: rgba(232,239,235,0.8); font-weight: 600; }
+
+    .doc-layout {
+      max-width: 1100px; margin: 0 auto;
+      padding: 64px 40px 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* TOC */
+    .toc {
+      position: sticky; top: 88px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .toc h4 {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .toc a {
+      display: block; font-size: 13px; color: var(--text-muted);
+      text-decoration: none; padding: 5px 0;
+      border-left: 2px solid transparent;
+      padding-left: 10px; margin-left: -10px;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+    .toc a:hover { color: var(--heritage); border-left-color: var(--terracotta); }
+
+    /* Article */
+    .doc-content h2 {
+      font-family: "Fraunces", serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--heritage);
+      margin: 48px 0 14px;
+      padding-top: 8px;
+    }
+    .doc-content h2:first-child { margin-top: 0; }
+    .doc-content h3 {
+      font-size: 16px; font-weight: 700;
+      color: var(--text); margin: 28px 0 10px;
+    }
+    .doc-content p {
+      font-size: 15px; line-height: 1.8;
+      color: var(--text); margin-bottom: 16px;
+    }
+    .doc-content ul, .doc-content ol {
+      padding-left: 20px; margin-bottom: 16px;
+    }
+    .doc-content li {
+      font-size: 15px; line-height: 1.8;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .doc-content strong { font-weight: 700; }
+    .doc-content a { color: var(--terracotta); }
+
+    .callout {
+      background: var(--parch-deep);
+      border-left: 3px solid var(--terracotta);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px; margin: 24px 0;
+    }
+    .callout p { margin: 0; font-size: 14px; color: var(--text-muted); }
+
+    table {
+      width: 100%; border-collapse: collapse;
+      margin: 20px 0; font-size: 14px;
+    }
+    th {
+      background: var(--parch-deep);
+      text-align: left; padding: 10px 14px;
+      font-weight: 700; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top; line-height: 1.6;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+    .signature-block {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 40px;
+    }
+    .signature-block h3 { margin-top: 0; margin-bottom: 16px; }
+    .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .sig-party p { font-size: 14px; color: var(--text-muted); margin-bottom: 4px; }
+    .sig-party strong { font-size: 15px; color: var(--text); }
+    .sig-line {
+      border-bottom: 1px solid var(--border);
+      margin-top: 32px; padding-bottom: 4px;
+      font-size: 12px; color: var(--text-muted);
+    }
+
+    footer { background: var(--heritage); color: var(--on-heritage); margin-top: 80px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 40px 28px; }
+    .footer-bottom {
+      border-top: 1px solid rgba(232,239,235,0.12);
+      padding-top: 20px; margin-top: 40px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: 13px; opacity: 0.45; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--on-heritage); text-decoration: none; font-size: 13px; opacity: 0.45; }
+    .footer-links a:hover { opacity: 0.8; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .page-hero { padding: 48px 20px 40px; }
+      .doc-layout { grid-template-columns: 1fr; padding: 32px 20px 60px; gap: 32px; }
+      .toc { position: static; }
+      .sig-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="https://gnwfrffneehpknyaygeb.supabase.co/storage/v1/object/public/assets/MAO%20Workforce%20Logo-4.png" alt="MAO Workforce" style="height:36px;width:auto;border-radius:4px;" />
+      MAO Workforce
+    </a>
+    <div class="nav-links">
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/blog">Blog</a>
+      <a href="https://portal.maoworkforce.com">Log in</a>
+      <a href="https://portal.maoworkforce.com" class="btn-nav" style="color:white;">Start free</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <h1>Data Processing Agreement</h1>
+      <p>This agreement governs how MAO Workforce processes personal data on behalf of its business customers in compliance with the Philippine Data Privacy Act of 2012 (RA 10173).</p>
+      <div class="meta">
+        <span><strong>Effective date:</strong> June 19, 2026</span>
+        <span><strong>Last updated:</strong> June 19, 2026</span>
+        <span><strong>Jurisdiction:</strong> Republic of the Philippines</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-layout">
+
+    <nav class="toc" aria-label="Table of contents">
+      <h4>Contents</h4>
+      <a href="#parties">1. Parties</a>
+      <a href="#definitions">2. Definitions</a>
+      <a href="#scope">3. Scope and Purpose</a>
+      <a href="#data-processed">4. Data Processed</a>
+      <a href="#obligations-processor">5. Processor Obligations</a>
+      <a href="#obligations-controller">6. Controller Obligations</a>
+      <a href="#subprocessors">7. Subprocessors</a>
+      <a href="#security">8. Security Measures</a>
+      <a href="#breach">9. Breach Notification</a>
+      <a href="#rights">10. Data Subject Rights</a>
+      <a href="#retention">11. Retention and Deletion</a>
+      <a href="#transfers">12. International Transfers</a>
+      <a href="#liability">13. Liability</a>
+      <a href="#termination">14. Termination</a>
+      <a href="#governing-law">15. Governing Law</a>
+      <a href="#contact">16. Contact</a>
+    </nav>
+
+    <article class="doc-content">
+
+      <div class="callout">
+        <p>By creating an account and using MAO Workforce, the Customer (Data Controller) agrees to be bound by this Data Processing Agreement. This DPA is incorporated into and forms part of the MAO Workforce Terms of Service.</p>
+      </div>
+
+      <h2 id="parties">1. Parties</h2>
+      <p>This Data Processing Agreement ("DPA") is entered into between:</p>
+      <ul>
+        <li><strong>Data Processor:</strong> MAO Workforce, operated by LeviO ("MAO", "we", "us"), with contact email hello@maoworkforce.com; and</li>
+        <li><strong>Data Controller:</strong> The business entity or individual ("Customer", "you") that has registered for and uses the MAO Workforce platform.</li>
+      </ul>
+      <p>Together referred to as the "Parties."</p>
+
+      <h2 id="definitions">2. Definitions</h2>
+      <ul>
+        <li><strong>"Personal Data"</strong> means any information relating to an identified or identifiable natural person, as defined under RA 10173.</li>
+        <li><strong>"Data Controller"</strong> means the party that determines the purposes and means of processing personal data (the Customer).</li>
+        <li><strong>"Data Processor"</strong> means the party that processes personal data on behalf of the Data Controller (MAO Workforce).</li>
+        <li><strong>"Data Subject"</strong> means the individual whose personal data is being processed (typically the Customer's employees).</li>
+        <li><strong>"Processing"</strong> means any operation performed on personal data, including collection, recording, storage, use, transfer, or deletion.</li>
+        <li><strong>"NPC"</strong> means the National Privacy Commission of the Philippines.</li>
+        <li><strong>"RA 10173"</strong> means the Data Privacy Act of 2012 and its implementing rules and regulations.</li>
+      </ul>
+
+      <h2 id="scope">3. Scope and Purpose</h2>
+      <p>MAO Workforce processes personal data solely to provide the HR and payroll services described in the Terms of Service. Processing is carried out only on documented instructions from the Customer, unless required by applicable law.</p>
+      <p>The subject matter, duration, nature, and purpose of processing are as follows:</p>
+      <table>
+        <tr><th>Subject matter</th><td>HR and payroll management for the Customer's workforce</td></tr>
+        <tr><th>Duration</th><td>For the term of the Customer's subscription and as required by this DPA after termination</td></tr>
+        <tr><th>Nature</th><td>Collection, storage, computation, display, and export of employee data</td></tr>
+        <tr><th>Purpose</th><td>Payroll computation, attendance tracking, leave management, employee self-service, statutory compliance reporting</td></tr>
+        <tr><th>Data subjects</th><td>The Customer's employees and contractors</td></tr>
+      </table>
+
+      <h2 id="data-processed">4. Personal Data Processed</h2>
+      <p>MAO Workforce processes the following categories of personal data on behalf of the Customer:</p>
+      <h3>Employee Identity Data</h3>
+      <ul>
+        <li>Full name, employee ID, date of birth</li>
+        <li>Contact information (email address, phone number)</li>
+        <li>Government ID numbers (SSS, PhilHealth, Pag-IBIG, TIN)</li>
+        <li>Bank account details (for payroll disbursement reference)</li>
+      </ul>
+      <h3>Employment Data</h3>
+      <ul>
+        <li>Job title, department, branch, employment type</li>
+        <li>Compensation (hourly rate, salary, allowances, deductions)</li>
+        <li>Attendance records (clock-in/out times, location data if geofencing is enabled)</li>
+        <li>Leave balances and request history</li>
+        <li>Payroll records and payslips</li>
+      </ul>
+      <h3>System Data</h3>
+      <ul>
+        <li>Login credentials (email and encrypted password via Supabase Auth)</li>
+        <li>Device and browser information for security purposes</li>
+        <li>Audit logs of actions taken within the platform</li>
+      </ul>
+
+      <div class="callout">
+        <p>MAO Workforce does not process special categories of personal data (e.g. health, religious beliefs, political opinions) unless explicitly provided by the Customer for legitimate HR purposes such as sick leave documentation.</p>
+      </div>
+
+      <h2 id="obligations-processor">5. Processor Obligations</h2>
+      <p>MAO Workforce agrees to:</p>
+      <ul>
+        <li>Process personal data only on the documented instructions of the Customer and for no other purpose;</li>
+        <li>Ensure that all personnel with access to personal data are bound by confidentiality obligations;</li>
+        <li>Implement and maintain appropriate technical and organizational security measures (see Section 8);</li>
+        <li>Not engage new subprocessors without prior notification to the Customer (see Section 7);</li>
+        <li>Assist the Customer in responding to data subject rights requests under RA 10173;</li>
+        <li>Notify the Customer of any personal data breach within 72 hours of becoming aware (see Section 9);</li>
+        <li>Delete or return all personal data upon termination of the agreement (see Section 11);</li>
+        <li>Provide all information necessary to demonstrate compliance with this DPA upon reasonable request.</li>
+      </ul>
+
+      <h2 id="obligations-controller">6. Controller Obligations</h2>
+      <p>The Customer agrees to:</p>
+      <ul>
+        <li>Have a lawful basis for processing personal data of its employees and for providing such data to MAO Workforce;</li>
+        <li>Obtain all necessary consents or inform data subjects of their data being processed through MAO Workforce;</li>
+        <li>Ensure the accuracy of personal data entered into the platform;</li>
+        <li>Comply with all applicable provisions of RA 10173 in its capacity as Data Controller;</li>
+        <li>Notify MAO Workforce promptly of any changes to processing instructions or data subject requests.</li>
+      </ul>
+
+      <h2 id="subprocessors">7. Subprocessors</h2>
+      <p>The Customer authorizes MAO Workforce to engage the following subprocessors to deliver the service:</p>
+      <table>
+        <tr><th>Subprocessor</th><th>Purpose</th><th>Location</th></tr>
+        <tr><td><strong>Supabase</strong></td><td>Database hosting, authentication, and storage</td><td>AWS ap-southeast-1 (Singapore)</td></tr>
+        <tr><td><strong>Vercel</strong></td><td>Application hosting and deployment</td><td>Global CDN (nearest region)</td></tr>
+        <tr><td><strong>Resend</strong></td><td>Transactional email delivery (payslips, notifications)</td><td>United States</td></tr>
+        <tr><td><strong>Anthropic</strong></td><td>AI assistant (Maomao) — processes user queries only, not employee records</td><td>United States</td></tr>
+        <tr><td><strong>PayMongo</strong></td><td>Payment processing for subscriptions</td><td>Philippines</td></tr>
+      </table>
+      <p>MAO Workforce will notify Customers of any intended changes to this list at least 14 days before the change takes effect, giving the Customer the opportunity to object.</p>
+
+      <h2 id="security">8. Security Measures</h2>
+      <p>MAO Workforce implements the following technical and organizational measures to protect personal data:</p>
+      <h3>Technical Measures</h3>
+      <ul>
+        <li><strong>Encryption at rest and in transit:</strong> All data is encrypted at rest (AES-256 via Supabase) and in transit (TLS 1.2+);</li>
+        <li><strong>Row-level security (RLS):</strong> Database policies ensure each business can only access its own data;</li>
+        <li><strong>Authentication:</strong> Secure session management via Supabase Auth with JWT tokens;</li>
+        <li><strong>Access controls:</strong> Role-based access control limits data access to authorized users only;</li>
+        <li><strong>Audit logging:</strong> All sensitive actions are logged with timestamps and user identifiers.</li>
+      </ul>
+      <h3>Organizational Measures</h3>
+      <ul>
+        <li>A designated Data Protection Officer (DPO) oversees data privacy compliance;</li>
+        <li>Access to production systems is restricted to authorized personnel only;</li>
+        <li>Third-party subprocessors are evaluated for security compliance before engagement.</li>
+      </ul>
+
+      <h2 id="breach">9. Personal Data Breach Notification</h2>
+      <p>In the event of a personal data breach involving Customer data, MAO Workforce will:</p>
+      <ul>
+        <li>Notify the affected Customer within <strong>72 hours</strong> of becoming aware of the breach;</li>
+        <li>Provide details of the nature of the breach, categories and approximate number of data subjects affected, likely consequences, and measures taken or proposed;</li>
+        <li>Assist the Customer in notifying the NPC and affected data subjects as required under RA 10173;</li>
+        <li>Document the breach and remediation steps taken.</li>
+      </ul>
+      <p>Breach notifications will be sent to the email address registered on the Customer's account.</p>
+
+      <h2 id="rights">10. Data Subject Rights</h2>
+      <p>Under RA 10173, data subjects (employees) have the right to be informed, access their data, correct inaccuracies, object to processing, and request erasure. MAO Workforce supports these rights through the platform:</p>
+      <ul>
+        <li><strong>Right to access:</strong> Employees can view their own attendance records, payslips, and leave history through the Employee Self-Service portal;</li>
+        <li><strong>Right to correction:</strong> Employees can file attendance correction requests; payroll corrections are handled by the Customer;</li>
+        <li><strong>Right to erasure:</strong> Customers may request data deletion by contacting hello@maoworkforce.com. Note that certain records must be retained for statutory compliance purposes;</li>
+        <li><strong>Right to data portability:</strong> Customers can export their data at any time from the platform or by submitting a request to MAO Workforce.</li>
+      </ul>
+      <p>MAO Workforce will assist the Customer in responding to data subject requests within the timeframes required by RA 10173.</p>
+
+      <h2 id="retention">11. Data Retention and Deletion</h2>
+      <p>MAO Workforce retains personal data for the duration of the Customer's subscription. Upon termination of the subscription:</p>
+      <ul>
+        <li>The Customer may request a full data export within <strong>30 days</strong> of termination;</li>
+        <li>After 30 days, personal data will be deleted from active systems;</li>
+        <li>Backup data may be retained for up to 90 days before permanent deletion;</li>
+        <li>Certain data may be retained longer where required by Philippine law (e.g. BIR records for 10 years).</li>
+      </ul>
+
+      <h2 id="transfers">12. International Data Transfers</h2>
+      <p>Some subprocessors (Vercel, Resend, Anthropic) are located outside the Philippines. MAO Workforce ensures that any international transfer of personal data is made with appropriate safeguards, including contractual obligations equivalent to those in this DPA, in accordance with NPC guidelines on cross-border data transfers.</p>
+      <p>Note: Anthropic's AI services process only the text of user queries submitted to the Maomao assistant feature. Employee payroll and attendance records are not transmitted to Anthropic.</p>
+
+      <h2 id="liability">13. Liability</h2>
+      <p>Each party shall be liable for its own breaches of this DPA. MAO Workforce's total aggregate liability under this DPA shall not exceed the fees paid by the Customer in the three months preceding the incident giving rise to the claim.</p>
+      <p>The Customer is solely responsible for the accuracy and legality of the personal data it submits to MAO Workforce and for ensuring it has a lawful basis to process employee data.</p>
+
+      <h2 id="termination">14. Termination</h2>
+      <p>This DPA remains in effect for the duration of the Customer's subscription to MAO Workforce and terminates automatically upon termination of the Terms of Service, subject to the data retention and deletion provisions in Section 11.</p>
+
+      <h2 id="governing-law">15. Governing Law</h2>
+      <p>This DPA is governed by the laws of the Republic of the Philippines, including the Data Privacy Act of 2012 (RA 10173) and its implementing rules and regulations. Any disputes arising under this DPA shall be subject to the jurisdiction of the courts of the Philippines.</p>
+
+      <h2 id="contact">16. Contact</h2>
+      <p>For questions about this DPA, data subject rights requests, or to report a personal data breach, contact:</p>
+      <table>
+        <tr><th>Role</th><th>Contact</th></tr>
+        <tr><td><strong>Data Protection Officer</strong></td><td>Abegail Unay</td></tr>
+        <tr><td><strong>Email</strong></td><td><a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a></td></tr>
+        <tr><td><strong>Organization</strong></td><td>MAO Workforce / LeviO</td></tr>
+        <tr><td><strong>Website</strong></td><td><a href="https://maoworkforce.com">maoworkforce.com</a></td></tr>
+      </table>
+
+      <hr class="divider" />
+
+      <div class="signature-block">
+        <h3>Agreement by Use</h3>
+        <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;">By registering for and using MAO Workforce, the Customer acknowledges that they have read, understood, and agree to this Data Processing Agreement. No physical signature is required — acceptance is established through account creation and continued use of the service.</p>
+        <div class="sig-grid">
+          <div class="sig-party">
+            <p>Data Processor</p>
+            <strong>MAO Workforce / LeviO</strong>
+            <div class="sig-line">Abegail Unay, DPO</div>
+            <p style="font-size:12px;color:var(--text-muted);margin-top:6px;">hello@maoworkforce.com</p>
+          </div>
+          <div class="sig-party">
+            <p>Data Controller</p>
+            <strong>The Customer</strong>
+            <div class="sig-line">Accepted upon account creation</div>
+            <p style="font-size:12px;color:var(--text-muted);margin-top:6px;">Via MAO Workforce platform</p>
+          </div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <p>© 2026 MAO Workforce | Powered by LeviO. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+          <a href="/dpa.html">DPA</a>
+          <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>'''
+
+path = os.path.join(base, 'dpa.html')
+with open(path, 'w') as f:
+    f.write(dpa_html)
+print("✓ dpa.html created")
+print()
+print("Now update footer in terms.html and privacy.html to add DPA link,")
+print("and add DPA to the footer in index.html.")
+print()
+print("Then run:")
+print("  cd ~/mao-landing && git add -A && git commit -m 'Add Data Processing Agreement (DPA) page' && git push")
