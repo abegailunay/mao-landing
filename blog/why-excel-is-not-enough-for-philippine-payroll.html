@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Excel Is Not Enough for Philippine Payroll — MAO Workforce</title>
+  <meta name="description" content="You're not bad at Excel. That's actually the problem. Here's why growing Philippine businesses are moving away from spreadsheet payroll." />
+  <meta property="og:title" content="Why Excel Is Not Enough for Philippine Payroll" />
+  <meta property="og:description" content="You're not bad at Excel. That's actually the problem. Here's why growing Philippine businesses are moving away from spreadsheet payroll." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://maoworkforce.com/blog/why-excel-is-not-enough-for-philippine-payroll" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #06231c;
+      --green-mid: #0f4a3a;
+      --terracotta: #bf4b2e;
+      --parchment: #fdfaf4;
+      --text: #1a1a1a;
+      --text-muted: #5a5a5a;
+      --border: #e5e0d5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Public Sans', sans-serif;
+      background: var(--parchment);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    nav {
+      background: var(--green);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      color: var(--parchment);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      color: rgba(253,250,244,0.75);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .nav-links a:hover { color: var(--parchment); }
+    .nav-cta {
+      background: var(--terracotta);
+      color: var(--parchment) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .post-header {
+      background: var(--green);
+      padding: 4rem 2rem 3.5rem;
+      text-align: center;
+    }
+    .post-meta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .post-category {
+      background: var(--terracotta);
+      color: var(--parchment);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 99px;
+    }
+    .post-date, .post-read-time {
+      color: rgba(253,250,244,0.6);
+      font-size: 0.875rem;
+    }
+    .post-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      color: var(--parchment);
+      line-height: 1.2;
+      max-width: 760px;
+      margin: 0 auto 1rem;
+    }
+    .post-excerpt {
+      color: rgba(253,250,244,0.75);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .post-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 5rem;
+    }
+    .post-body p {
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+    .post-body h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      color: var(--green);
+      margin: 2.5rem 0 1rem;
+      line-height: 1.3;
+    }
+    .post-body h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--green-mid);
+      margin: 2rem 0 0.75rem;
+    }
+    .post-body ul, .post-body ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .post-body li {
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+      color: var(--text);
+    }
+    .post-body strong { color: var(--green); font-weight: 600; }
+    .callout {
+      background: #eef7f3;
+      border-left: 3px solid var(--green-mid);
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      font-size: 1rem;
+      color: var(--green);
+    }
+    .callout strong { color: var(--green); }
+    .post-cta {
+      background: var(--green);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .post-cta h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      color: var(--parchment);
+      margin-bottom: 0.75rem;
+    }
+    .post-cta p {
+      color: rgba(253,250,244,0.75);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .post-cta a {
+      display: inline-block;
+      background: var(--terracotta);
+      color: var(--parchment);
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .post-cta a:hover { opacity: 0.9; }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2.5rem;
+    }
+    .back-link:hover { color: var(--green); }
+    footer {
+      background: var(--green);
+      color: rgba(253,250,244,0.6);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+    }
+    footer a { color: rgba(253,250,244,0.6); text-decoration: none; margin: 0 0.75rem; }
+    footer a:hover { color: var(--parchment); }
+    .footer-bottom { margin-top: 0.5rem; }
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      .post-body { padding: 2.5rem 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">MAO Workforce</a>
+  <div class="nav-links">
+    <a href="/blog">Blog</a>
+    <a href="https://portal.maoworkforce.com" class="nav-cta">Try for free</a>
+  </div>
+</nav>
+
+<div class="post-header">
+  <div class="post-meta">
+    <span class="post-category">HR Guide</span>
+    <span class="post-date">June 20, 2026</span>
+    <span class="post-read-time">5 min read</span>
+  </div>
+  <h1 class="post-title">Why Excel Is Not Enough for Philippine Payroll</h1>
+  <p class="post-excerpt">You're not bad at Excel. That's actually the problem.</p>
+</div>
+
+<div class="post-body">
+
+  <a href="/blog" class="back-link">← Back to blog</a>
+
+  <p>We're not going to tell you that you don't know how to use Excel. You probably do. You likely have a VLOOKUP or two, some nested IF formulas, a payroll template you spent a Saturday afternoon building. And it works. For a while.</p>
+
+  <p>That's the problem.</p>
+
+  <p>Excel works until it doesn't. And in Philippine payroll specifically, there are more ways to hit that wall than most business owners realize until they're already past it.</p>
+
+  <h2>What payroll in the Philippines actually involves</h2>
+
+  <p>Philippine payroll is not a simple multiplication. Every cutoff requires you to account for:</p>
+
+  <ul>
+    <li><strong>SSS contribution brackets</strong> — the table was updated in 2023 and the rate has been increasing every year since RA 11199 took effect</li>
+    <li><strong>PhilHealth premiums</strong> — currently at 5% with an income ceiling of ₱100,000 per month</li>
+    <li><strong>Pag-IBIG contributions</strong> — straightforward, but has a maximum monthly compensation base that needs to be capped</li>
+    <li><strong>TRAIN Law withholding tax</strong> — graduated brackets that compute differently depending on whether your pay frequency is semi-monthly or monthly</li>
+    <li><strong>Holiday pay multipliers</strong> — regular holidays, special non-working days, and rest days each have their own rates under the Labor Code</li>
+    <li><strong>Overtime, late deductions, night shift differential</strong> — none of these are flat amounts</li>
+    <li><strong>13th month pay</strong> — pro-rated for employees who didn't complete the full year, with a tax exemption on the first ₱90,000</li>
+  </ul>
+
+  <p>Yes, all of this can technically be done in Excel. The question is whether you can maintain accuracy across all of it as your team grows, as government rates change, and as your business gets more complex.</p>
+
+  <div class="callout">
+    <strong>To put it in perspective:</strong> A single payroll run for 10 employees with mixed attendance, late deductions, and holiday pay can take 3 to 5 hours to process manually. One wrong cell reference may go unnoticed until an employee flags it, or worse, until a BIR audit surfaces it.
+  </div>
+
+  <h2>Where spreadsheet payroll actually breaks down</h2>
+
+  <h3>1. It has no memory of what changed</h3>
+
+  <p>When PhilHealth adjusted to 5% in 2023, how many businesses were still running old deduction rates for the next two or three payroll cycles because nobody updated the template? That's not a skill problem. That's a process problem. Dedicated payroll software updates contribution tables automatically. A spreadsheet does not.</p>
+
+  <h3>2. It's disconnected from attendance</h3>
+
+  <p>Who was absent for half a day last Monday? Who worked overtime on Saturday? In a spreadsheet setup, someone has to manually encode that from a logbook, time cards, or a separate attendance sheet. Every encoding step is a chance for an error that won't surface until the employee questions their payslip.</p>
+
+  <h3>3. There is no audit trail</h3>
+
+  <p>Imagine an employee disputes a deduction from three months ago. You open the old file. Who edited it last? When? Which version is authoritative? In most payroll spreadsheets, you don't have a clear answer. In a payroll system, every change is logged.</p>
+
+  <h3>4. Payslips are a separate manual step</h3>
+
+  <p>A payslip is not just a courtesy. Employees need it for loan applications, visa requirements, and government transactions. If your payroll lives in Excel, generating individual payslips is another manual task on top of the computation itself. Another step, another hour, another place where something can go wrong.</p>
+
+  <h3>5. It does not scale with your team</h3>
+
+  <p>At 5 employees, the spreadsheet is manageable. At 15, it starts getting unwieldy. At 30, payroll processing is practically a part-time job. That time cost grows with your business, not against it.</p>
+
+  <h2>The real question is not "Excel or software"</h2>
+
+  <p>The real question is: <strong>what is your time actually worth?</strong></p>
+
+  <p>If payroll takes you most of a day per cutoff, and cutoff happens twice a month, that's roughly two full days every month spent on something that could take 20 minutes. Add the stress of not being sure if the numbers are right, and you're carrying that weight every single pay period.</p>
+
+  <p>This is not about capability. It's about where your energy should go as a business owner. Growing your business, managing your team, and serving your customers are better uses of your time than cross-checking SSS tables every time you hire someone new.</p>
+
+  <div class="callout">
+    <strong>Worth knowing:</strong> The BIR and SSS have the right to audit payroll records going back up to three years. Inaccuracies you're carrying today will not surface as a problem today. They surface later, with penalties attached.
+  </div>
+
+  <h2>You don't need to be a large company to make the switch</h2>
+
+  <p>The assumption that payroll software is only for big corporations is outdated. There are tools built specifically for teams of 5 to 50 employees, priced for what an SME can actually afford, and set up without an IT team.</p>
+
+  <p>That's what MAO Workforce is built for. Attendance tracking, automatic computation of SSS, PhilHealth, Pag-IBIG, and withholding tax, and digital payslips your employees can access on their phones. Built for Philippine businesses, updated for local labor laws and government rates.</p>
+
+  <p>Every business owner who has made the switch from Excel tends to say one of two things: "I should have done this sooner" or "This is what payroll was supposed to feel like."</p>
+
+  <hr class="divider" />
+
+  <p style="font-size: 0.95rem; color: var(--text-muted);">Written by <strong style="color: var(--green);">Abegail U.</strong>, founder of MAO Workforce. She also runs Nami's Cuddle &amp; Co. and yes, she used to do payroll in Excel too.</p>
+
+  <div class="post-cta">
+    <h3>Try MAO Workforce for free</h3>
+    <p>Up to 5 employees, no credit card needed. See what automated payroll actually feels like.</p>
+    <a href="https://portal.maoworkforce.com">Get started →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div>
+    <a href="/blog">Blog</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/dpa.html">DPA</a>
+    <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a>
+  </div>
+  <div class="footer-bottom">© 2026 MAO Workforce. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
