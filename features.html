@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features Guide | MAO Workforce</title>
+  <meta name="description" content="A complete guide to every page and feature in MAO Workforce." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MAO Workforce" />
+  <meta property="og:title" content="Features Guide | MAO Workforce" />
+  <meta property="og:description" content="Learn what every page and feature in MAO Workforce does." />
+  <meta property="og:image" content="https://gnwfrffneehpknyaygeb.supabase.co/storage/v1/object/public/assets/og-image.png" />
+  <meta property="og:url" content="https://maoworkforce.com/features" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --heritage:    #06231c;
+      --terracotta:  #bf4b2e;
+      --terra-light: #d46140;
+      --parchment:   #fdfaf4;
+      --parch-deep:  #f5f1e8;
+      --parch-mid:   #f0eee9;
+      --text:        #2a2825;
+      --text-muted:  #6b665e;
+      --border:      #e5e0d5;
+      --on-heritage: #e8efeb;
+      --white:       #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Public Sans', system-ui, sans-serif; background: var(--parchment); color: var(--text); font-size: 16px; line-height: 1.6; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--parchment); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-weight: 700; color: var(--heritage); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--heritage); }
+    .btn-nav { background: var(--terracotta); color: white !important; padding: 8px 20px; border-radius: 8px; font-weight: 600 !important; }
+
+    /* HERO */
+    .help-hero { background: var(--heritage); color: white; padding: 56px 5% 48px; text-align: center; }
+    .help-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 14px; }
+    .help-hero h1 { font-family: 'Fraunces', Georgia, serif; font-size: clamp(32px, 5vw, 52px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; color: white; }
+    .help-hero p { font-size: 16px; color: rgba(232,239,235,0.75); max-width: 480px; margin: 0 auto; }
+
+    /* LAYOUT */
+    .help-layout { display: grid; grid-template-columns: 240px 1fr; gap: 48px; max-width: 1100px; margin: 48px auto; padding: 0 5% 80px; align-items: start; }
+    .help-sidebar { position: sticky; top: 80px; }
+    .sidebar-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .sidebar-nav { list-style: none; }
+    .sidebar-nav li a { display: block; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: all 0.15s; border-left: 2px solid transparent; }
+    .sidebar-nav li a:hover, .sidebar-nav li a.active { background: var(--parch-deep); color: var(--heritage); border-left-color: var(--terracotta); }
+    .sidebar-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+    .sidebar-contact p { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+    .sidebar-contact a { display: block; font-size: 13px; color: var(--terracotta); text-decoration: none; margin-bottom: 4px; }
+
+    /* SECTIONS */
+    .guide-section { margin-bottom: 64px; scroll-margin-top: 84px; }
+    .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .section-icon { width: 38px; height: 38px; background: var(--heritage); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .guide-section h2 { font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 700; color: var(--heritage); }
+    .section-intro { font-size: 15px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.7; padding: 16px 20px; background: var(--parch-deep); border-radius: 10px; border-left: 3px solid var(--terracotta); }
+
+    /* ACCORDION */
+    .guide-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+    .guide-question { width: 100%; background: white; border: none; padding: 18px 20px; text-align: left; font-family: 'Public Sans', sans-serif; font-size: 15px; font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.15s; }
+    .guide-question:hover { background: var(--parch-deep); }
+    .guide-question.open { background: var(--parch-deep); color: var(--heritage); }
+    .guide-chevron { transition: transform 0.2s; font-size: 18px; color: var(--text-muted); }
+    .guide-question.open .guide-chevron { transform: rotate(180deg); }
+    .guide-answer { display: none; padding: 0 20px 20px; background: white; font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+    .guide-answer.open { display: block; }
+    .guide-answer p { margin-bottom: 10px; }
+    .guide-answer ul { margin: 8px 0 10px 18px; }
+    .guide-answer ul li { margin-bottom: 6px; }
+    .guide-answer strong { color: var(--text); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; margin-right: 4px; margin-bottom: 4px; }
+    .tag-owner { background: #fef3c7; color: #92400e; }
+    .tag-admin { background: #dbeafe; color: #1e40af; }
+    .tag-manager { background: #d1fae5; color: #065f46; }
+    .tag-employee { background: #f3e8ff; color: #6b21a8; }
+
+    /* FOOTER */
+    footer { background: var(--heritage); color: var(--on-heritage); padding: 40px 5%; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 13px; color: rgba(232,239,235,0.35); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: rgba(232,239,235,0.35); text-decoration: none; }
+    .footer-links a:hover { color: rgba(232,239,235,0.65); }
+
+    @media (max-width: 768px) {
+      .help-layout { grid-template-columns: 1fr; }
+      .help-sidebar { position: static; display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="https://gnwfrffneehpknyaygeb.supabase.co/storage/v1/object/public/assets/MAO%20Workforce%20Logo-4.png" alt="MAO Workforce" style="height:36px;width:auto;border-radius:4px;" />
+    MAO Workforce
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/faq">Help</a>
+    <a href="https://portal.maoworkforce.com">Log in</a>
+    <a href="https://portal.maoworkforce.com" class="btn-nav">Start free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="help-hero">
+  <div class="help-eyebrow">Features Guide</div>
+  <h1>How MAO Workforce works</h1>
+  <p>A complete walkthrough of every page and feature — so you get the most out of the platform.</p>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="help-layout">
+  <!-- SIDEBAR -->
+  <aside class="help-sidebar">
+    <p class="sidebar-label">Pages</p>
+    <ul class="sidebar-nav">
+      <li><a href="#dashboard" class="active">Dashboard</a></li>
+      <li><a href="#payroll">Payroll</a></li>
+      <li><a href="#reports">Reports</a></li>
+      <li><a href="#hr-records">HR Records</a></li>
+      <li><a href="#attendance">Attendance</a></li>
+      <li><a href="#scheduling">Scheduling</a></li>
+      <li><a href="#workforce">Workforce</a></li>
+      <li><a href="#settings">Settings</a></li>
+      <li><a href="#ess">Employee Self-Service</a></li>
+    </ul>
+    <hr class="sidebar-divider" />
+    <div class="sidebar-contact">
+      <p>Still need help?</p>
+      <a href="mailto:hello@maoworkforce.com">hello@maoworkforce.com</a>
+      <a href="https://portal.maoworkforce.com">Open the portal →</a>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main>
+
+    <!-- DASHBOARD -->
+    <section class="guide-section" id="dashboard">
+      <div class="section-header">
+        <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <h2>Dashboard</h2>
+      </div>
+      <p class="section-intro">The Dashboard is your real-time command center. It gives HR owners and admins an at-a-glance view of today's workforce status, pending approvals, and payroll health — all in one place.</p>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Attendance Health table
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Shows every active employee and their current status for today:</p>
+          <ul>
+            <li><strong>Clocked In</strong> — employee has clocked in on time</li>
+            <li><strong>Late</strong> — clocked in after the grace period; shows scheduled shift time and actual clock-in time</li>
+            <li><strong>On Break</strong> — currently on a logged break</li>
+            <li><strong>Not In</strong> — has not clocked in yet for today</li>
+          </ul>
+          <p>You can filter by branch using the All Sites / Main toggle at the top right of the table.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Pending Approvals
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>A consolidated list of all items waiting for your action, pulled from across the platform:</p>
+          <ul>
+            <li><strong>Leave Requests</strong> — employees requesting time off</li>
+            <li><strong>Overtime Exceptions</strong> — detected early or late clock-ins/outs needing approval</li>
+            <li><strong>Correction Requests</strong> — employees requesting edits to their attendance logs</li>
+            <li><strong>Payroll Disputes</strong> — submitted disputes on released payslips</li>
+          </ul>
+          <p>Clicking any item takes you directly to the relevant approval page.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Payroll Summary
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Shows the most recently released payroll run for your business — including gross pay, net pay, headcount, and the cutoff period it covers. Useful for a quick sanity check after each payroll release.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Re-sync Data
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Forces a fresh reload of all dashboard data from the server, bypassing the local cache. Use this if you've just made changes elsewhere (e.g. approved a leave request, edited an attendance log) and want the dashboard to reflect them immediately. The dashboard also auto-refreshes every 60 seconds in the background.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Export PDF
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Generates a printable PDF snapshot of the current day's Attendance Health table. Useful for end-of-day records, supervisor reports, or offline filing. The export captures all employees and their status at the moment you click the button.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Who can access the Dashboard?
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>The HR Dashboard is accessible to:</p>
+          <p>
+            <span class="tag tag-owner">Tenant Owner</span>
+            <span class="tag tag-admin">HR Admin</span>
+            <span class="tag tag-manager">Manager</span>
+          </p>
+          <p style="margin-top:8px;">Employees have their own separate dashboard in the Employee Self-Service (ESS) portal, which shows their personal attendance, schedule, payslips, and leave balances.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAYROLL -->
+    <section class="guide-section" id="payroll">
+      <div class="section-header">
+        <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <h2>Payroll</h2>
+      </div>
+      <p class="section-intro">The Payroll module handles the full payroll cycle — from setting up cutoff periods to generating drafts, approving runs, releasing payslips, and managing disputes.</p>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Cutoffs
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Payroll cutoffs define the work period covered by each payroll run. You can set these up manually or use a cutoff template to generate them automatically (e.g. 1st–15th and 16th–end of month for semi-monthly payroll).</p>
+          <ul>
+            <li><strong>Open</strong> — active cutoff, attendance is still being recorded</li>
+            <li><strong>Closed</strong> — period is locked, payroll run can be generated</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Runs & Releases
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>A payroll run is created against a cutoff period. The lifecycle of a run is:</p>
+          <ul>
+            <li><strong>Draft</strong> — generated from attendance data; review employee computations</li>
+            <li><strong>Approved</strong> — HR owner has signed off on the draft</li>
+            <li><strong>Released</strong> — payslips are visible to employees in ESS</li>
+          </ul>
+          <p>You can generate a draft, refresh it after making corrections, approve it, and release it. Each step requires deliberate action — nothing releases automatically.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Disputes
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>After payslips are released, employees can file disputes if they believe their pay was computed incorrectly. Disputes appear here for HR to review, request more information, or resolve. Each dispute has a messaging thread so HR and the employee can communicate directly.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Manual Deductions
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Add one-time or recurring deductions for individual employees — cash advances, equipment loans, uniform fees, etc. Deductions are automatically applied to the next applicable payroll run and carried forward if not fully deducted.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HR RECORDS -->
+    <section class="guide-section" id="hr-records">
+      <div class="section-header">
+        <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+        <h2>HR Records</h2>
+      </div>
+      <p class="section-intro">HR Records covers leave management, memos, and incident reports — the documentation side of managing your team.</p>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Leave Requests
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>View and action all leave requests from employees. You can approve, reject, or request more information. Approved leaves are automatically reflected in payroll computations for the relevant cutoff period.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Memos
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Issue formal memos to employees — written warnings, notices to explain, show-cause letters, and other disciplinary communications. Each memo has:</p>
+          <ul>
+            <li>A severity level (e.g. Verbal Warning, Written Warning, Final Warning)</li>
+            <li>Nature of violation, consequences, and employer expectation fields</li>
+            <li>An optional file attachment</li>
+            <li>An expiration date (auto-calculated from severity settings)</li>
+            <li>An escalation path — if a new incident occurs, you can escalate to a higher severity memo linked to the original</li>
+          </ul>
+          <p>Employees receive a notification and must acknowledge the memo in their ESS portal.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Incident Reports
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Employees can file incident reports directly from the ESS portal. HR can review, update the status, and use incident reports as supporting documentation when issuing memos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ATTENDANCE -->
+    <section class="guide-section" id="attendance">
+      <div class="section-header">
+        <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h2>Attendance</h2>
+      </div>
+      <p class="section-intro">The Attendance module gives you full visibility into employee clock-in/out records, daily summaries, exceptions, and correction requests.</p>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Logs
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>The raw clock-in and clock-out records for every employee. You can filter by date, employee, branch, status, or cutoff period. HR can also add manual entries, edit existing logs, or delete records when needed. Each log shows clock-in photo if photo verification is enabled.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Summaries
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Computed daily attendance summaries per employee — showing total payable hours, late minutes, overtime hours, and attendance status (Present, Late, Absent, Half-day). These summaries feed directly into payroll draft generation.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Exceptions
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Attendance exceptions are automatically flagged when an employee clocks in early, late, or outside their scheduled shift. Exceptions require HR approval before they affect payroll. You can approve or reject exceptions individually or in bulk.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Corrections
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Employees can submit correction requests from ESS when they believe their clock-in or clock-out time was wrong (e.g. forgot to clock out, wrong time recorded). HR reviews and approves or rejects these requests. Approved corrections update the attendance log automatically.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Geofencing
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>When enabled, MAO restricts clock-ins to employees within a defined radius of your workplace. Set up your geofence under <strong>Settings → Attendance</strong> by dropping a pin on the map and setting the allowed radius. Employees outside the radius will be blocked from clocking in via the ESS portal.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCHEDULING -->
+    <section class="guide-section" id="scheduling">
+      <div class="section-header">
+        <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <h2>Scheduling</h2>
+      </div>
+      <p class="section-intro">Set up shift templates, assign schedules to employees, manage your weekly roster, and handle shift swaps and temporary changes.</p>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Shift Templates
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Define reusable shift configurations — name, start time, end time, unpaid break duration, and grace period. Templates are assigned to employees and used as the basis for attendance exception detection and payroll computation.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Employee Scheduling
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Assign shift templates to specific employees for specific date ranges. An employee can have different shifts on different days. Schedule assignments must be approved before they take effect.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Weekly Roster & Daily Staffing
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>The Weekly Roster gives you a 7-day grid view of all employee schedules — useful for spotting gaps or conflicts. Daily Staffing shows who is scheduled for a specific date, by branch and role.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Shift Swaps
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Employees can request to swap shifts with a colleague directly from ESS. The swap goes through an approval flow: the target employee accepts, then HR approves. Approved swaps update both employees' schedules automatically.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKFORCE -->
+    <section class="guide-section" id="workforce">
+      <div class="section-header">
+        <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h2>Workforce</h2>
+      </div>
+      <p class="section-intro">Manage your employee roster, company directory, and organizational structure — branches, roles, and departments.</p>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Employees
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>The full list of all employees in your business. From here you can add new employees, view and edit employee profiles, manage compensation, assign roles, set up kiosk PIN access, and provision ESS login accounts.</p>
+          <p>Each employee profile has tabs for: Profile, Employment Details, Compensation, Roles, Schedule, Kiosk Access, and Memos.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Company Directory
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>A searchable directory of all active employees — with profile photos, roles, departments, and contact info. Employees can also view and update their own directory profile from ESS.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Branches & Roles
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Define the organizational structure of your business. <strong>Branches</strong> represent physical locations or cost centers. <strong>Roles</strong> define job positions (e.g. Cashier, Team Lead, Cook) and can have associated daily rate overrides. <strong>Departments</strong> group roles together for reporting purposes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="guide-section" id="settings">
+      <div class="section-header">
+        <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <h2>Settings</h2>
+      </div>
+      <p class="section-intro">Configure your business — payroll rules, attendance policies, statutory rates, holidays, memo types, and leave types.</p>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Payroll Settings
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Configure overtime multipliers (regular OT, rest day OT, holiday OT), night differential rules, and whether overtime requires prior approval. These settings apply globally to all payroll runs for your business.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Attendance Settings
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Configure photo verification requirements for clock-in and clock-out, and set up geofencing. Photo modes: Disabled, Required for Clock-In, Required for Clock-Out, or Required for Both.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Statutory Rates (SSS, PhilHealth, Pag-IBIG)
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>MAO comes pre-loaded with the current SSS, PhilHealth, and Pag-IBIG contribution tables. You can view the active tables and update them when the government releases new rates. These are used automatically in every payroll run.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Holidays
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Manage the holiday calendar for your business. MAO can import Philippine public holidays automatically by year. You can also add custom holidays (e.g. local holidays, company anniversaries). Holiday types and pay multipliers follow DOLE guidelines by default.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Memo Settings
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Define the memo types (e.g. Attendance, Conduct, Performance) and severity levels (e.g. Verbal Warning, Written Warning, Final Warning) used in your business. Each severity can have a default expiration period in days.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Leave Types
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Configure the leave types available to your employees — Sick Leave, Vacation Leave, Emergency Leave, etc. Set accrual rules, whether the leave is paid or unpaid, and whether it requires documentation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESS -->
+    <section class="guide-section" id="ess">
+      <div class="section-header">
+        <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h2>Employee Self-Service (ESS)</h2>
+      </div>
+      <p class="section-intro">ESS is the employee-facing portal where your team members can clock in and out, view their payslips, file leave requests, and more — without needing to contact HR for everything.</p>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          Employee Dashboard
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Each employee's personal home screen showing their clock-in/out button, today's shift, current attendance status, and leave balance summary. Employees clock in and out directly from this page using their device camera (if photo verification is enabled).</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          My Payslips
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Employees can view all their released payslips, see a full breakdown of earnings and deductions, and download a PDF copy. If they believe a payslip is incorrect, they can file a dispute directly from this page.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          My Attendance
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>A personal log of all the employee's clock-in and clock-out records. Employees can submit correction requests from here if they notice a discrepancy in their attendance data.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          My Leave
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Employees can view their leave balances, submit new leave requests, and track the status of pending requests. Approved leave is automatically reflected in their payroll for the relevant period.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          My Memos
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>Employees can view memos issued to them by HR, submit their written explanation, and formally acknowledge receipt. Unacknowledged memos show a banner reminder on their dashboard until actioned.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          My Schedule
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>A calendar view of the employee's assigned shifts. Employees can also request shift swaps with colleagues from this page.</p>
+        </div>
+      </div>
+
+      <div class="guide-item">
+        <button class="guide-question" onclick="toggleGuide(this)">
+          How do employees log in to ESS?
+          <span class="guide-chevron">&#8964;</span>
+        </button>
+        <div class="guide-answer">
+          <p>HR provisions an ESS login from the employee's profile page (<strong>Workforce → Employees → [Employee] → Create Login</strong>). The employee receives an email invitation to set their password, then logs in at <a href="https://portal.maoworkforce.com" style="color:var(--terracotta);">portal.maoworkforce.com</a>.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 LeviO. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/faq">Help Center</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleGuide(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    btn.classList.toggle('open', !isOpen);
+    answer.classList.toggle('open', !isOpen);
+  }
+
+  // Sidebar active state on scroll
+  const sections = document.querySelectorAll('.guide-section');
+  const navLinks = document.querySelectorAll('.sidebar-nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>
